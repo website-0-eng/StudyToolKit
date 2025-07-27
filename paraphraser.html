@@ -477,9 +477,27 @@
             const nlp = window.nlp;
 
             const intensityLevels = {
-                0: { label: 'Light', wordChangeRate: 0.2, sentenceRestructureRate: 0.1 },
-                1: { label: 'Medium', wordChangeRate: 0.4, sentenceRestructureRate: 0.3 },
-                2: { label: 'Aggressive', wordChangeRate: 0.6, sentenceRestructureRate: 0.5 }
+                0: { 
+                    label: 'Light', 
+                    wordChangeRate: 0.3,
+                    phraseChangeRate: 0.1,
+                    sentenceRestructureRate: 0.2,
+                    paragraphRestructureRate: 0.1
+                },
+                1: { 
+                    label: 'Medium', 
+                    wordChangeRate: 0.5,
+                    phraseChangeRate: 0.3,
+                    sentenceRestructureRate: 0.4,
+                    paragraphRestructureRate: 0.2
+                },
+                2: { 
+                    label: 'Aggressive', 
+                    wordChangeRate: 0.7,
+                    phraseChangeRate: 0.5,
+                    sentenceRestructureRate: 0.6,
+                    paragraphRestructureRate: 0.4
+                }
             };
 
             if (intensitySlider) {
@@ -508,118 +526,162 @@
                 });
             });
 
-            // Enhanced synonym database with parts of speech tagging
+            // Expanded academic synonym database
             const synonymDatabase = {
-                // Verbs
-                "analyze": ["examine", "study", "investigate", "scrutinize", "assess"],
-                "demonstrate": ["show", "illustrate", "prove", "display", "manifest"],
-                "discuss": ["examine", "debate", "consider", "deliberate", "explore"],
-                "explain": ["clarify", "elucidate", "interpret", "expound", "justify"],
-                "suggest": ["propose", "recommend", "advise", "hint", "imply"],
-                "argue": ["contend", "assert", "reason", "claim", "debate"],
-                "describe": ["portray", "characterize", "detail", "narrate", "depict"],
-                "develop": ["evolve", "expand", "refine", "cultivate", "advance"],
-                "evaluate": ["assess", "appraise", "judge", "gauge", "measure"],
-                "indicate": ["show", "signify", "denote", "reveal", "point to"],
-                "present": ["introduce", "offer", "submit", "put forward", "display"],
-                "prove": ["verify", "confirm", "validate", "substantiate", "corroborate"],
-                "reveal": ["disclose", "uncover", "expose", "divulge", "make known"],
+                // Verbs (expanded)
+                "analyze": ["scrutinize", "examine", "investigate", "assess", "evaluate", "interpret"],
+                "demonstrate": ["illustrate", "exhibit", "manifest", "substantiate", "validate", "verify"],
+                "discuss": ["deliberate", "debate", "examine", "explore", "consider", "review"],
+                "explain": ["elucidate", "clarify", "expound", "interpret", "justify", "rationalize"],
+                "suggest": ["propose", "recommend", "advocate", "posit", "submit", "advise"],
+                "argue": ["contend", "assert", "reason", "claim", "debate", "dispute"],
+                "describe": ["portray", "characterize", "narrate", "depict", "detail", "chronicle"],
+                "develop": ["formulate", "evolve", "cultivate", "refine", "advance", "establish"],
+                "evaluate": ["appraise", "assess", "gauge", "measure", "scrutinize", "judge"],
+                "indicate": ["signify", "denote", "reveal", "demonstrate", "imply", "suggest"],
+                "present": ["introduce", "offer", "submit", "advance", "proffer", "put forward"],
+                "prove": ["verify", "confirm", "validate", "substantiate", "corroborate", "authenticate"],
+                "reveal": ["disclose", "uncover", "expose", "divulge", "manifest", "unveil"],
+                "examine": ["inspect", "analyze", "scrutinize", "investigate", "study", "assess"],
+                "illustrate": ["demonstrate", "exemplify", "show", "depict", "represent", "clarify"],
+                "investigate": ["explore", "examine", "research", "study", "probe", "scrutinize"],
+                "support": ["substantiate", "corroborate", "validate", "verify", "confirm", "endorse"],
                 
-                // Nouns
-                "analysis": ["examination", "study", "investigation", "evaluation", "assessment"],
-                "argument": ["contention", "assertion", "reasoning", "claim", "debate"],
-                "aspect": ["facet", "feature", "characteristic", "element", "dimension"],
-                "concept": ["idea", "notion", "principle", "theory", "abstraction"],
-                "conclusion": ["inference", "deduction", "verdict", "resolution", "outcome"],
-                "evidence": ["proof", "confirmation", "verification", "substantiation", "corroboration"],
-                "factor": ["element", "component", "aspect", "determinant", "influence"],
-                "issue": ["matter", "topic", "concern", "problem", "question"],
-                "method": ["approach", "technique", "procedure", "strategy", "system"],
-                "perspective": ["viewpoint", "standpoint", "outlook", "angle", "position"],
-                "process": ["procedure", "method", "system", "operation", "mechanism"],
-                "research": ["investigation", "study", "inquiry", "exploration", "examination"],
-                "result": ["outcome", "consequence", "effect", "upshot", "product"],
-                "source": ["origin", "basis", "root", "foundation", "derivation"],
-                "structure": ["framework", "organization", "composition", "configuration", "arrangement"],
-                "theory": ["hypothesis", "concept", "principle", "postulate", "supposition"],
+                // Nouns (expanded)
+                "analysis": ["examination", "investigation", "assessment", "evaluation", "study", "appraisal"],
+                "argument": ["contention", "assertion", "reasoning", "claim", "thesis", "position"],
+                "aspect": ["facet", "dimension", "feature", "characteristic", "element", "component"],
+                "concept": ["notion", "idea", "principle", "theory", "abstraction", "construct"],
+                "conclusion": ["inference", "deduction", "verdict", "resolution", "outcome", "determination"],
+                "evidence": ["proof", "confirmation", "verification", "substantiation", "corroboration", "attestation"],
+                "factor": ["element", "component", "determinant", "influence", "consideration", "aspect"],
+                "issue": ["matter", "topic", "concern", "problem", "question", "subject"],
+                "method": ["approach", "technique", "procedure", "strategy", "system", "process"],
+                "perspective": ["viewpoint", "standpoint", "outlook", "angle", "position", "orientation"],
+                "process": ["procedure", "method", "system", "operation", "mechanism", "approach"],
+                "research": ["investigation", "study", "inquiry", "exploration", "examination", "analysis"],
+                "result": ["outcome", "consequence", "effect", "upshot", "product", "finding"],
+                "source": ["origin", "basis", "root", "foundation", "derivation", "provenance"],
+                "structure": ["framework", "organization", "composition", "configuration", "arrangement", "system"],
+                "theory": ["hypothesis", "concept", "principle", "postulate", "supposition", "construct"],
+                "approach": ["method", "strategy", "technique", "procedure", "system", "means"],
+                "benefit": ["advantage", "asset", "gain", "merit", "positive", "value"],
+                "challenge": ["difficulty", "obstacle", "problem", "issue", "hurdle", "complication"],
+                "context": ["circumstance", "environment", "setting", "background", "framework", "situation"],
                 
-                // Adjectives
-                "accurate": ["precise", "correct", "exact", "faithful", "truthful"],
-                "adequate": ["sufficient", "satisfactory", "acceptable", "passable", "tolerable"],
-                "appropriate": ["suitable", "fitting", "proper", "relevant", "applicable"],
-                "complex": ["complicated", "intricate", "involved", "convoluted", "sophisticated"],
-                "consistent": ["uniform", "constant", "steady", "stable", "unchanging"],
-                "effective": ["efficient", "productive", "successful", "competent", "capable"],
-                "essential": ["crucial", "vital", "fundamental", "indispensable", "necessary"],
-                "evident": ["obvious", "apparent", "clear", "manifest", "noticeable"],
-                "important": ["significant", "crucial", "vital", "notable", "momentous"],
-                "logical": ["rational", "reasonable", "coherent", "sensible", "valid"],
-                "major": ["significant", "important", "principal", "primary", "key"],
-                "obvious": ["clear", "evident", "apparent", "manifest", "patent"],
-                "potential": ["possible", "likely", "prospective", "future", "latent"],
-                "primary": ["main", "chief", "principal", "key", "fundamental"],
-                "relevant": ["pertinent", "applicable", "germane", "related", "connected"],
-                "significant": ["important", "notable", "meaningful", "considerable", "substantial"],
-                "similar": ["alike", "comparable", "analogous", "equivalent", "parallel"],
-                "specific": ["particular", "precise", "exact", "definite", "explicit"],
-                "valid": ["sound", "cogent", "well-founded", "justifiable", "legitimate"],
+                // Adjectives (expanded)
+                "accurate": ["precise", "exact", "correct", "faithful", "truthful", "reliable"],
+                "adequate": ["sufficient", "satisfactory", "acceptable", "passable", "tolerable", "competent"],
+                "appropriate": ["suitable", "fitting", "proper", "relevant", "applicable", "pertinent"],
+                "complex": ["complicated", "intricate", "involved", "convoluted", "sophisticated", "multifaceted"],
+                "consistent": ["uniform", "constant", "steady", "stable", "unchanging", "reliable"],
+                "effective": ["efficient", "productive", "successful", "competent", "capable", "potent"],
+                "essential": ["crucial", "vital", "fundamental", "indispensable", "necessary", "critical"],
+                "evident": ["obvious", "apparent", "clear", "manifest", "noticeable", "patent"],
+                "important": ["significant", "crucial", "vital", "notable", "momentous", "paramount"],
+                "logical": ["rational", "reasonable", "coherent", "sensible", "valid", "sound"],
+                "major": ["significant", "important", "principal", "primary", "key", "crucial"],
+                "obvious": ["clear", "evident", "apparent", "manifest", "patent", "transparent"],
+                "potential": ["possible", "likely", "prospective", "future", "latent", "conceivable"],
+                "primary": ["main", "chief", "principal", "key", "fundamental", "central"],
+                "relevant": ["pertinent", "applicable", "germane", "related", "connected", "appropriate"],
+                "significant": ["important", "notable", "meaningful", "considerable", "substantial", "noteworthy"],
+                "similar": ["alike", "comparable", "analogous", "equivalent", "parallel", "corresponding"],
+                "specific": ["particular", "precise", "exact", "definite", "explicit", "clear-cut"],
+                "valid": ["sound", "cogent", "well-founded", "justifiable", "legitimate", "credible"],
+                "comprehensive": ["complete", "thorough", "exhaustive", "inclusive", "extensive", "detailed"],
+                "critical": ["crucial", "vital", "essential", "pivotal", "decisive", "important"],
                 
-                // Adverbs
-                "accurately": ["precisely", "exactly", "correctly", "faithfully", "truthfully"],
-                "adequately": ["sufficiently", "satisfactorily", "acceptably", "passably", "tolerably"],
-                "clearly": ["obviously", "evidently", "plainly", "manifestly", "undoubtedly"],
-                "completely": ["totally", "entirely", "fully", "thoroughly", "utterly"],
-                "effectively": ["efficiently", "successfully", "competently", "capably", "productively"],
-                "essentially": ["basically", "fundamentally", "primarily", "chiefly", "principally"],
-                "generally": ["usually", "typically", "normally", "commonly", "ordinarily"],
-                "importantly": ["significantly", "crucially", "vitally", "notably", "momentously"],
-                "logically": ["rationally", "reasonably", "coherently", "sensibly", "validly"],
-                "obviously": ["clearly", "evidently", "apparently", "manifestly", "patently"],
-                "particularly": ["especially", "specifically", "notably", "distinctly", "uniquely"],
-                "potentially": ["possibly", "likely", "prospectively", "conceivably", "plausibly"],
-                "primarily": ["mainly", "chiefly", "principally", "mostly", "predominantly"],
-                "significantly": ["importantly", "notably", "considerably", "substantially", "markedly"],
-                "similarly": ["likewise", "correspondingly", "analogously", "comparably", "equivalently"],
-                "specifically": ["particularly", "precisely", "exactly", "explicitly", "expressly"],
-                "validly": ["soundly", "cogently", "justifiably", "legitimately", "rightfully"]
+                // Adverbs (expanded)
+                "accurately": ["precisely", "exactly", "correctly", "faithfully", "truthfully", "scrupulously"],
+                "adequately": ["sufficiently", "satisfactorily", "acceptably", "passably", "tolerably", "competently"],
+                "clearly": ["obviously", "evidently", "plainly", "manifestly", "undoubtedly", "transparently"],
+                "completely": ["totally", "entirely", "fully", "thoroughly", "utterly", "absolutely"],
+                "effectively": ["efficiently", "successfully", "competently", "capably", "productively", "potently"],
+                "essentially": ["basically", "fundamentally", "primarily", "chiefly", "principally", "substantially"],
+                "generally": ["usually", "typically", "normally", "commonly", "ordinarily", "customarily"],
+                "importantly": ["significantly", "crucially", "vitally", "notably", "momentously", "critically"],
+                "logically": ["rationally", "reasonably", "coherently", "sensibly", "validly", "soundly"],
+                "obviously": ["clearly", "evidently", "apparently", "manifestly", "patently", "transparently"],
+                "particularly": ["especially", "specifically", "notably", "distinctly", "uniquely", "markedly"],
+                "potentially": ["possibly", "likely", "prospectively", "conceivably", "plausibly", "feasibly"],
+                "primarily": ["mainly", "chiefly", "principally", "mostly", "predominantly", "fundamentally"],
+                "significantly": ["importantly", "notably", "considerably", "substantially", "markedly", "greatly"],
+                "similarly": ["likewise", "correspondingly", "analogously", "comparably", "equivalently", "uniformly"],
+                "specifically": ["particularly", "precisely", "exactly", "explicitly", "expressly", "definitely"],
+                "validly": ["soundly", "cogently", "justifiably", "legitimately", "rightfully", "credibly"],
+                "actively": ["energetically", "vigorously", "dynamically", "intensely", "forcefully", "industriously"],
+                "broadly": ["widely", "extensively", "generally", "comprehensively", "universally", "sweepingly"]
             };
 
-            // Common phrases and their alternatives
+            // Expanded phrase database with academic alternatives
             const phraseDatabase = {
-                "in order to": ["to", "so as to", "for the purpose of"],
-                "due to the fact that": ["because", "since", "as"],
-                "in spite of the fact that": ["although", "even though"],
-                "with regard to": ["regarding", "concerning", "about"],
-                "in the event that": ["if", "should"],
-                "at this point in time": ["now", "currently"],
-                "take into consideration": ["consider", "think about"],
-                "give rise to": ["cause", "lead to"],
-                "make reference to": ["refer to", "mention"],
-                "put forward the idea that": ["suggest", "propose"],
-                "it could be argued that": ["perhaps", "possibly"],
-                "there is no doubt that": ["undoubtedly", "certainly"],
-                "as a matter of fact": ["in fact", "actually"],
-                "in the final analysis": ["finally", "ultimately"],
-                "all things considered": ["overall", "taking everything into account"],
-                "it is important to note that": ["notably", "importantly"],
-                "the fact that": ["that", "because"],
-                "in terms of": ["regarding", "concerning"],
-                "on the other hand": ["conversely", "however"],
-                "as well as": ["and", "also"],
-                "in addition to": ["besides", "furthermore"],
-                "with respect to": ["regarding", "concerning"],
-                "in light of": ["considering", "because of"],
-                "for the most part": ["mostly", "generally"],
-                "at the present time": ["currently", "now"]
+                "in order to": ["to", "so as to", "for the purpose of", "aiming to", "with the goal of", "with the intention of"],
+                "due to the fact that": ["because", "since", "as", "given that", "owing to the fact that", "on account of"],
+                "in spite of the fact that": ["although", "even though", "despite the fact that", "notwithstanding that", "regardless of the fact that"],
+                "with regard to": ["regarding", "concerning", "about", "in relation to", "with respect to", "pertaining to"],
+                "in the event that": ["if", "should", "in case", "supposing that", "assuming that", "were it to occur that"],
+                "at this point in time": ["now", "currently", "presently", "at present", "at the current time", "at this juncture"],
+                "take into consideration": ["consider", "take into account", "bear in mind", "factor in", "account for", "make allowance for"],
+                "give rise to": ["cause", "lead to", "result in", "bring about", "produce", "generate"],
+                "make reference to": ["refer to", "mention", "cite", "allude to", "point to", "invoke"],
+                "put forward the idea that": ["suggest", "propose", "posit", "advance the notion that", "submit that", "hypothesize that"],
+                "it could be argued that": ["perhaps", "possibly", "one might contend that", "there is reason to believe that", "it is plausible that", "a case could be made that"],
+                "there is no doubt that": ["undoubtedly", "certainly", "unquestionably", "indisputably", "it is certain that", "it is undeniable that"],
+                "as a matter of fact": ["in fact", "actually", "in reality", "in truth", "indeed", "essentially"],
+                "in the final analysis": ["finally", "ultimately", "when all is said and done", "in conclusion", "in summary", "at the end of the day"],
+                "all things considered": ["overall", "taking everything into account", "on balance", "when everything is considered", "in the grand scheme of things", "by and large"],
+                "it is important to note that": ["notably", "importantly", "significantly", "crucially", "it should be emphasized that", "it is worth noting that"],
+                "the fact that": ["that", "because", "since", "given that", "considering that", "as"],
+                "in terms of": ["regarding", "concerning", "with respect to", "in relation to", "as far as", "when it comes to"],
+                "on the other hand": ["conversely", "however", "by contrast", "in contrast", "alternatively", "that said"],
+                "as well as": ["and", "also", "in addition to", "along with", "together with", "not to mention"],
+                "in addition to": ["besides", "furthermore", "moreover", "along with", "as well as", "coupled with"],
+                "with respect to": ["regarding", "concerning", "in relation to", "with regard to", "pertaining to", "in connection with"],
+                "in light of": ["considering", "because of", "taking into account", "in view of", "given", "accounting for"],
+                "for the most part": ["mostly", "generally", "predominantly", "mainly", "largely", "principally"],
+                "at the present time": ["currently", "now", "presently", "at present", "at this time", "nowadays"],
+                "it is clear that": ["evidently", "obviously", "manifestly", "it is apparent that", "it is evident that", "there is no question that"],
+                "as a result": ["consequently", "therefore", "thus", "hence", "accordingly", "because of this"],
+                "in other words": ["that is to say", "put differently", "to rephrase", "to put it another way", "namely", "which means"],
+                "for example": ["for instance", "such as", "to illustrate", "as an illustration", "by way of example", "as a case in point"],
+                "in conclusion": ["finally", "to sum up", "in summary", "to conclude", "all in all", "in closing"],
+                "on the one hand": ["from one perspective", "from one standpoint", "initially", "firstly", "from one angle", "from one point of view"]
             };
 
-            // Protected terms that shouldn't be changed (technical terms, proper nouns, etc.)
+            // Expanded protected terms (technical terms, proper nouns, etc.)
             const protectedTerms = [
                 "climate change", "global warming", "fossil fuels", "renewable energy",
                 "social media", "real time", "power grid", "United States", "European Union",
-                "World Health Organization", "COVID-19", "Artificial Intelligence", "Machine Learning"
+                "World Health Organization", "COVID-19", "Artificial Intelligence", "Machine Learning",
+                "Paris Climate Accord", "United Nations", "NASA", "World Bank", "International Monetary Fund",
+                "Harvard University", "MIT", "Stanford University", "Oxford University", "Cambridge University",
+                "quantum computing", "neural networks", "deep learning", "blockchain technology",
+                "sustainable development", "greenhouse gas emissions", "carbon footprint", "biodiversity loss",
+                "economic recession", "inflation rate", "gross domestic product", "supply chain", "market equilibrium",
+                "human rights", "democratic governance", "constitutional law", "judicial review", "separation of powers"
             ];
 
+            // Sentence starters for restructuring
+            const sentenceStarters = [
+                "Research indicates that", "Studies show", "Evidence suggests", "It has been demonstrated",
+                "Current findings reveal", "Recent data confirms", "Analysis demonstrates", "Scholars argue",
+                "Experts contend", "The literature suggests", "Available information shows", "Statistics indicate",
+                "Available evidence points to", "The prevailing view is", "A growing consensus suggests",
+                "Theoretical models predict", "Empirical studies confirm", "Historical records show",
+                "Case studies illustrate", "Field observations demonstrate"
+            ];
+
+            // Connector phrases for combining sentences
+            const connectorPhrases = [
+                "which leads to", "resulting in", "thereby creating", "thus producing",
+                "which consequently", "thereby enabling", "which in turn", "as a consequence",
+                "which ultimately", "thereby facilitating", "which thereby", "as a result",
+                "which contributes to", "thereby generating", "which fosters", "thereby promoting",
+                "which encourages", "thereby allowing", "which stimulates", "thereby supporting"
+            ];
+
+            // Enhanced paraphrase function
             function paraphrase(text, intensity) {
                 if (!text.trim()) return "";
                 
@@ -651,9 +713,9 @@
                 let doc = nlp(protectedText);
                 
                 // Apply transformations based on intensity
-                const { wordChangeRate, sentenceRestructureRate } = intensity;
+                const { wordChangeRate, phraseChangeRate, sentenceRestructureRate, paragraphRestructureRate } = intensity;
                 
-                // 1. Change words with synonyms
+                // 1. Change words with synonyms (more aggressive at higher intensities)
                 doc.terms().forEach(term => {
                     const word = term.text('normal');
                     const lowerWord = word.toLowerCase();
@@ -675,13 +737,13 @@
                     }
                 });
                 
-                // 2. Restructure sentences
+                // 2. Restructure sentences (more aggressive at higher intensities)
                 doc.sentences().forEach(sentence => {
                     if (Math.random() < sentenceRestructureRate) {
                         const s = sentence;
                         
-                        // Randomly choose a restructuring method
-                        const method = Math.floor(Math.random() * 4);
+                        // Randomly choose a restructuring method (expanded options)
+                        const method = Math.floor(Math.random() * 8);
                         
                         try {
                             switch(method) {
@@ -696,18 +758,17 @@
                                     const adverbs = s.match('#Adverb').out('array');
                                     if (adverbs.length > 0) {
                                         const adverb = adverbs[0];
-                                        s.replace(adverb, ''); // Remove first
+                                        s.replace(adverb, '');
                                         if (Math.random() > 0.5) {
-                                            s.prepend(adverb + ' '); // Put at beginning
+                                            s.prepend(adverb + ' ');
                                         } else {
-                                            s.append(' ' + adverb); // Put at end
+                                            s.append(' ' + adverb);
                                         }
                                     }
                                     break;
                                 case 2: // Change sentence structure (compound to complex or vice versa)
                                     const clauses = s.clauses();
                                     if (clauses.length > 1) {
-                                        // For simplicity, just join with "and" or split
                                         if (Math.random() > 0.5) {
                                             s.text(s.text().replace(/,\s*/g, ' and '));
                                         } else {
@@ -718,7 +779,6 @@
                                 case 3: // Change between positive and negative forms
                                     const negations = s.match('#Negative').out('array');
                                     if (negations.length > 0) {
-                                        // Remove negation and find antonym of main verb
                                         s.negative(false);
                                         const verbs = s.verbs();
                                         if (verbs.length > 0) {
@@ -729,7 +789,6 @@
                                             }
                                         }
                                     } else {
-                                        // Add negation and find antonym of main verb
                                         const verbs = s.verbs();
                                         if (verbs.length > 0) {
                                             const verb = verbs[0];
@@ -741,12 +800,67 @@
                                         }
                                     }
                                     break;
+                                case 4: // Change sentence starter
+                                    if (Math.random() < 0.7) { // Higher probability for this common change
+                                        const starter = sentenceStarters[Math.floor(Math.random() * sentenceStarters.length)];
+                                        s.prepend(starter + ' ');
+                                    }
+                                    break;
+                                case 5: // Combine with next sentence if possible
+                                    if (Math.random() < 0.4 && s.next()) {
+                                        const nextSentence = s.next();
+                                        const connector = connectorPhrases[Math.floor(Math.random() * connectorPhrases.length)];
+                                        s.text(s.text() + ' ' + connector + ' ' + nextSentence.text());
+                                        nextSentence.remove();
+                                    }
+                                    break;
+                                case 6: // Split long sentences
+                                    if (s.text().length > 100 && Math.random() < 0.6) {
+                                        const clauses = s.clauses();
+                                        if (clauses.length > 1) {
+                                            const midPoint = Math.floor(clauses.length / 2);
+                                            const firstPart = clauses.slice(0, midPoint).join(' ');
+                                            const secondPart = clauses.slice(midPoint).join(' ');
+                                            s.text(firstPart + '. ' + secondPart.charAt(0).toUpperCase() + secondPart.slice(1));
+                                        }
+                                    }
+                                    break;
+                                case 7: // Add/remove qualifiers
+                                    const qualifiers = ["generally", "typically", "often", "usually", "frequently", "sometimes"];
+                                    if (Math.random() > 0.5) {
+                                        // Add qualifier
+                                        const qualifier = qualifiers[Math.floor(Math.random() * qualifiers.length)];
+                                        s.prepend(qualifier + ' ');
+                                    } else {
+                                        // Remove qualifier if present
+                                        qualifiers.forEach(q => {
+                                            if (s.text().includes(q)) {
+                                                s.replace(q, '');
+                                            }
+                                        });
+                                    }
+                                    break;
                             }
                         } catch (e) {
                             console.log("Error restructuring sentence:", e);
                         }
                     }
                 });
+                
+                // 3. Paragraph-level restructuring (for aggressive mode)
+                if (intensitySlider.value == 2 && Math.random() < paragraphRestructureRate) {
+                    const sentences = doc.sentences().out('array');
+                    if (sentences.length > 2) {
+                        // Randomly reorder sentences (but keep first and last in place for coherence)
+                        const middleSentences = sentences.slice(1, -1);
+                        for (let i = middleSentences.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [middleSentences[i], middleSentences[j]] = [middleSentences[j], middleSentences[i]];
+                        }
+                        const newText = [sentences[0], ...middleSentences, sentences[sentences.length - 1]].join(' ');
+                        doc = nlp(newText);
+                    }
+                }
                 
                 // Convert back to text
                 let result = doc.text();
@@ -760,40 +874,71 @@
                 result = result.replace(/\s+([.,;:!?])/g, '$1'); // Remove space before punctuation
                 result = result.replace(/([a-z])\s*-\s*([a-z])/gi, '$1-$2'); // Fix hyphen spacing
                 result = result.replace(/(\w)\s+'\s+(\w)/g, "$1'$2"); // Fix apostrophes
+                result = result.replace(/\s+,/g, ','); // Remove space before commas
+                result = result.replace(/(\w)\s+(\.)/g, "$1$2"); // Remove space before periods
                 
                 // Capitalize first letter of each sentence
                 result = result.replace(/(^|[.!?]\s+)([a-z])/g, (match, p1, p2) => p1 + p2.toUpperCase());
                 
+                // Ensure proper spacing after periods
+                result = result.replace(/\.([a-zA-Z])/g, '. $1');
+                
                 return result;
             }
             
-            // Simple antonym finder (could be expanded)
+            // Enhanced antonym finder
             function findAntonym(word) {
                 const antonyms = {
-                    "increase": "decrease",
-                    "decrease": "increase",
-                    "improve": "worsen",
-                    "worsen": "improve",
-                    "support": "oppose",
-                    "oppose": "support",
-                    "agree": "disagree",
-                    "disagree": "agree",
-                    "accept": "reject",
-                    "reject": "accept",
-                    "include": "exclude",
-                    "exclude": "include",
-                    "prove": "disprove",
-                    "disprove": "prove",
-                    "confirm": "deny",
-                    "deny": "confirm",
-                    "like": "dislike",
-                    "dislike": "like",
-                    "love": "hate",
-                    "hate": "love",
-                    "begin": "end",
-                    "end": "begin",
-                    "start": "stop",
-                    "stop": "start"
+                    "increase": "decrease", "decrease": "increase",
+                    "improve": "worsen", "worsen": "improve",
+                    "support": "oppose", "oppose": "support",
+                    "agree": "disagree", "disagree": "agree",
+                    "accept": "reject", "reject": "accept",
+                    "include": "exclude", "exclude": "include",
+                    "prove": "disprove", "disprove": "prove",
+                    "confirm": "deny", "deny": "confirm",
+                    "like": "dislike", "dislike": "like",
+                    "love": "hate", "hate": "love",
+                    "begin": "end", "end": "begin",
+                    "start": "stop", "stop": "start",
+                    "add": "remove", "remove": "add",
+                    "create": "destroy", "destroy": "create",
+                    "build": "demolish", "demolish": "build",
+                    "gain": "lose", "lose": "gain",
+                    "win": "lose", "lose": "win",
+                    "arrive": "depart", "depart": "arrive",
+                    "enter": "exit", "exit": "enter",
+                    "appear": "disappear", "disappear": "appear",
+                    "open": "close", "close": "open",
+                    "ascend": "descend", "descend": "ascend",
+                    "advance": "retreat", "retreat": "advance",
+                    "attack": "defend", "defend": "attack",
+                    "buy": "sell", "sell": "buy",
+                    "capture": "release", "release": "capture",
+                    "connect": "disconnect", "disconnect": "connect",
+                    "construct": "deconstruct", "deconstruct": "construct",
+                    "expand": "contract", "contract": "expand",
+                    "give": "take", "take": "give",
+                    "import": "export", "export": "import",
+                    "inflate": "deflate", "deflate": "inflate",
+                    "install": "uninstall", "uninstall": "install",
+                    "join": "separate", "separate": "join",
+                    "lead": "follow", "follow": "lead",
+                    "lend": "borrow", "borrow": "lend",
+                    "maximize": "minimize", "minimize": "maximize",
+                    "optimize": "undermine", "undermine": "optimize",
+                    "pass": "fail", "fail": "pass",
+                    "preserve": "destroy", "destroy": "preserve",
+                    "promote": "demote", "demote": "promote",
+                    "protect": "expose", "expose": "protect",
+                    "raise": "lower", "lower": "raise",
+                    "remember": "forget", "forget": "remember",
+                    "succeed": "fail", "fail": "succeed",
+                    "strengthen": "weaken", "weaken": "strengthen",
+                    "teach": "learn", "learn": "teach",
+                    "unite": "divide", "divide": "unite",
+                    "validate": "invalidate", "invalidate": "validate",
+                    "yield": "resist", "resist": "yield"
                 };
                 return antonyms[word.toLowerCase()] || null;
             }
