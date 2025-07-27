@@ -1,31 +1,70 @@
-# StudyToolKit (STK) 🚀
+# StudyToolKit (STK) 🎓🚀
 
 **Your Free Toolkit for Academic Success**  
+*Essential privacy-focused tools for students, writers, and researchers. Paraphrase, summarize, cite, and convert documents instantly - no signups required.*
 
-Essential, privacy-focused online tools for students, writers, and researchers. Simplify your writing, citing, and formatting tasks instantly.
+[![GitHub Pages](https://img.shields.io/badge/Live_Demo-Available-success?style=for-the-badge)](https://website-0-eng.github.io/StudyToolKit/)
+[![License](https://img.shields.io/github/license/website-0-eng/StudyToolKit?style=for-the-badge)](LICENSE)
 
-👉 [Live Demo](https://website-0-eng.github.io/StudyToolKit/)  
+## 🌟 Featured Tools
 
-## Features ✨
+| Tool | Key Features | Try It |
+|------|-------------|--------|
+| 📝 **Paraphrasing Tool** | Rewrite sentences/paragraphs while preserving meaning, avoid plagiarism | [Live Demo](https://website-0-eng.github.io/StudyToolKit/paraphraser.html) |
+| ✂️ **Text Summarizer** | Extract key points from articles/research papers in seconds | [Live Demo](https://website-0-eng.github.io/StudyToolKit/summarizer.html) |
+| 📚 **Citation Generator** | APA/MLA/Chicago citations for books, articles, websites | [Live Demo](https://website-0-eng.github.io/StudyToolKit/citation-generator.html) |
+| 📄 **Word to PDF** | Convert DOCX/PPTX to PDF with no watermarks | [Live Demo](https://website-0-eng.github.io/StudyToolKit/word-to-pdf.html) |
 
-| Tool | Description |
-|------|-------------|
-| 📝 **Paraphrasing Tool** | Rephrase sentences/paragraphs to avoid plagiarism while keeping original meaning |
-| ✂️ **Text Summarizer** | Extract key points from articles, papers, or long texts |
-| 📚 **Citation Generator** | Create APA/MLA/Chicago citations for books, articles, and websites |
-| 📄 **Word to PDF** | Convert DOCX/PPTX/TXT files to PDF with no watermarks |
+## 🔥 Why Choose StudyToolKit?
 
-## Key Advantages 🔑
+✅ **100% Free Forever** - No hidden fees, paywalls, or premium tiers  
+⚡ **Zero Signups** - Instant access to all tools  
+🔒 **Privacy First** - All processing happens in your browser (we never see your data)  
+📱 **Mobile Friendly** - Works perfectly on all devices  
 
-✅ **100% Free** - No hidden fees or premium tiers  
-⚡ **Instant Access** - No registration required  
-🔒 **Privacy-Focused** - All processing happens in your browser  
-🎓 **Academic-Optimized** - Tools designed for students/researchers  
+## 🛠️ Tech Stack
 
-## Tech Stack 💻
+**Frontend**:  
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
 
-- **Frontend**: HTML5, CSS3, JavaScript  
-- **Libraries**:  
-  - [Compromise NLP](https://github.com/spencermountain/compromise) - For paraphrasing  
-  - [html2pdf.js](https://github.com/eKoopmans/html2pdf.js) - For PDF conversion  
-  - [Mammoth.js](https://github.com/mwilliamson/mammoth.js) - DOCX to HTML conversion  
+**Key Libraries**:  
+- [Compromise NLP](https://github.com/spencermountain/compromise) - For intelligent paraphrasing
+- [html2pdf.js](https://github.com/eKoopmans/html2pdf.js) - Client-side PDF conversion
+- [Mammoth.js](https://github.com/mwilliamson/mammoth.js) - DOCX to HTML conversion
+
+## 🚀 Getting Started
+
+1. **Use the Tools**:  
+   Visit our [live demo](https://website-0-eng.github.io/StudyToolKit/) to start using all tools instantly.
+
+2. **Run Locally**:  
+   ```bash
+   git clone https://github.com/website-0-eng/StudyToolKit.git
+   cd StudyToolKit
+   python -m http.server 8000
+Open http://localhost:8000 in your browser.
+
+🤝 How to Contribute
+We welcome contributions! Here's how:
+
+Fork the project
+
+Create your feature branch (git checkout -b feature/AmazingFeature)
+
+Commit your changes (git commit -m 'Add amazing feature')
+
+Push to the branch (git push origin feature/AmazingFeature)
+
+Open a Pull Request
+
+📜 License
+Distributed under the MIT License. See LICENSE for more information.
+
+Connect:
+📧 Have questions? Open an issue
+💡 Feature request? Suggest it here
+
+Live Site: https://website-0-eng.github.io/StudyToolKit/
+Source Code: https://github.com/website-0-eng/StudyToolKit
