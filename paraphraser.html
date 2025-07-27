@@ -477,9 +477,9 @@
             const nlp = window.nlp;
 
             const intensityLevels = {
-                0: { label: 'Light', rate: 0.8 }, // 20% chance
-                1: { label: 'Medium', rate: 0.6 }, // 40% chance
-                2: { label: 'Aggressive', rate: 0.5 } // 50% chance
+                0: { label: 'Light', wordChangeRate: 0.2, sentenceRestructureRate: 0.1 },
+                1: { label: 'Medium', wordChangeRate: 0.4, sentenceRestructureRate: 0.3 },
+                2: { label: 'Aggressive', wordChangeRate: 0.6, sentenceRestructureRate: 0.5 }
             };
 
             if (intensitySlider) {
@@ -508,100 +508,294 @@
                 });
             });
 
-            function paraphrase(text, intensity) {
-                const protectedPhrases = {
-                    "climate change": ["global warming", "environmental crisis"],
-                    "fossil fuels": ["non-renewable fuels", "traditional energy sources"],
-                    "renewable energy": ["clean energy", "sustainable power"],
-                    "social media": ["online networks", "digital platforms"],
-                    "real time": ["instantaneously"],
-                    "power grid": ["electrical grid"]
-                };
-
-                const synonymMap = {
-                    "sources": ["origins", "forms", "types"], "gained": ["achieved", "acquired"],
-                    "momentum": ["traction", "impetus"], "growing": ["increasing", "rising"],
-                    "concerns": ["worries", "anxieties"], "impact": ["effect", "influence"],
-                    "governments": ["administrations", "authorities"], "investing": ["funding", "financing"],
-                    "heavily": ["substantially", "significantly"], "clean": ["sustainable", "green"],
-                    "technologies": ["innovations", "advancements"], "offering": ["providing", "supplying"],
-                    "incentives": ["subsidies", "encouragements"], "encourage": ["promote", "foster"],
-                    "individuals": ["people", "citizens"], "companies": ["corporations", "businesses"],
-                    "adopt": ["embrace", "implement"], "sustainable": ["eco-friendly", "green"],
-                    "practices": ["methods", "approaches"], "challenges": ["obstacles", "hurdles"],
-                    "remain": ["persist", "continue to exist"], "including": ["such as", "for instance"],
-                    "need": ["requirement", "necessity"], "better": ["improved", "more effective"],
-                    "storage": ["preservation", "warehousing"], "solutions": ["answers", "remedies"],
-                    "updating": ["modernizing", "upgrading"], "existing": ["current", "present"],
-                    "accommodate": ["integrate", "handle"], "variable": ["fluctuating", "inconsistent"],
-                    "significantly": ["considerably", "markedly"], "changed": ["altered", "transformed"],
-                    "way": ["manner", "method"], "communicate": ["interact", "connect"],
-                    "rise": ["emergence", "growth"], "platforms": ["networks", "services"],
-                    "can": ["are able to", "have the capacity to"], "stay": ["remain"],
-                    "connected": ["in touch", "linked"], "around": ["across the"],
-                    "world": ["globe"], "advancement": ["development", "progress"],
-                    "made": ["rendered", "caused"], "communication": ["interaction", "discourse"],
-                    "faster": ["quicker", "more rapid"], "convenient": ["accessible", "user-friendly"],
-                    "accessible": ["available", "reachable"]
-                };
+            // Enhanced synonym database with parts of speech tagging
+            const synonymDatabase = {
+                // Verbs
+                "analyze": ["examine", "study", "investigate", "scrutinize", "assess"],
+                "demonstrate": ["show", "illustrate", "prove", "display", "manifest"],
+                "discuss": ["examine", "debate", "consider", "deliberate", "explore"],
+                "explain": ["clarify", "elucidate", "interpret", "expound", "justify"],
+                "suggest": ["propose", "recommend", "advise", "hint", "imply"],
+                "argue": ["contend", "assert", "reason", "claim", "debate"],
+                "describe": ["portray", "characterize", "detail", "narrate", "depict"],
+                "develop": ["evolve", "expand", "refine", "cultivate", "advance"],
+                "evaluate": ["assess", "appraise", "judge", "gauge", "measure"],
+                "indicate": ["show", "signify", "denote", "reveal", "point to"],
+                "present": ["introduce", "offer", "submit", "put forward", "display"],
+                "prove": ["verify", "confirm", "validate", "substantiate", "corroborate"],
+                "reveal": ["disclose", "uncover", "expose", "divulge", "make known"],
                 
+                // Nouns
+                "analysis": ["examination", "study", "investigation", "evaluation", "assessment"],
+                "argument": ["contention", "assertion", "reasoning", "claim", "debate"],
+                "aspect": ["facet", "feature", "characteristic", "element", "dimension"],
+                "concept": ["idea", "notion", "principle", "theory", "abstraction"],
+                "conclusion": ["inference", "deduction", "verdict", "resolution", "outcome"],
+                "evidence": ["proof", "confirmation", "verification", "substantiation", "corroboration"],
+                "factor": ["element", "component", "aspect", "determinant", "influence"],
+                "issue": ["matter", "topic", "concern", "problem", "question"],
+                "method": ["approach", "technique", "procedure", "strategy", "system"],
+                "perspective": ["viewpoint", "standpoint", "outlook", "angle", "position"],
+                "process": ["procedure", "method", "system", "operation", "mechanism"],
+                "research": ["investigation", "study", "inquiry", "exploration", "examination"],
+                "result": ["outcome", "consequence", "effect", "upshot", "product"],
+                "source": ["origin", "basis", "root", "foundation", "derivation"],
+                "structure": ["framework", "organization", "composition", "configuration", "arrangement"],
+                "theory": ["hypothesis", "concept", "principle", "postulate", "supposition"],
+                
+                // Adjectives
+                "accurate": ["precise", "correct", "exact", "faithful", "truthful"],
+                "adequate": ["sufficient", "satisfactory", "acceptable", "passable", "tolerable"],
+                "appropriate": ["suitable", "fitting", "proper", "relevant", "applicable"],
+                "complex": ["complicated", "intricate", "involved", "convoluted", "sophisticated"],
+                "consistent": ["uniform", "constant", "steady", "stable", "unchanging"],
+                "effective": ["efficient", "productive", "successful", "competent", "capable"],
+                "essential": ["crucial", "vital", "fundamental", "indispensable", "necessary"],
+                "evident": ["obvious", "apparent", "clear", "manifest", "noticeable"],
+                "important": ["significant", "crucial", "vital", "notable", "momentous"],
+                "logical": ["rational", "reasonable", "coherent", "sensible", "valid"],
+                "major": ["significant", "important", "principal", "primary", "key"],
+                "obvious": ["clear", "evident", "apparent", "manifest", "patent"],
+                "potential": ["possible", "likely", "prospective", "future", "latent"],
+                "primary": ["main", "chief", "principal", "key", "fundamental"],
+                "relevant": ["pertinent", "applicable", "germane", "related", "connected"],
+                "significant": ["important", "notable", "meaningful", "considerable", "substantial"],
+                "similar": ["alike", "comparable", "analogous", "equivalent", "parallel"],
+                "specific": ["particular", "precise", "exact", "definite", "explicit"],
+                "valid": ["sound", "cogent", "well-founded", "justifiable", "legitimate"],
+                
+                // Adverbs
+                "accurately": ["precisely", "exactly", "correctly", "faithfully", "truthfully"],
+                "adequately": ["sufficiently", "satisfactorily", "acceptably", "passably", "tolerably"],
+                "clearly": ["obviously", "evidently", "plainly", "manifestly", "undoubtedly"],
+                "completely": ["totally", "entirely", "fully", "thoroughly", "utterly"],
+                "effectively": ["efficiently", "successfully", "competently", "capably", "productively"],
+                "essentially": ["basically", "fundamentally", "primarily", "chiefly", "principally"],
+                "generally": ["usually", "typically", "normally", "commonly", "ordinarily"],
+                "importantly": ["significantly", "crucially", "vitally", "notably", "momentously"],
+                "logically": ["rationally", "reasonably", "coherently", "sensibly", "validly"],
+                "obviously": ["clearly", "evidently", "apparently", "manifestly", "patently"],
+                "particularly": ["especially", "specifically", "notably", "distinctly", "uniquely"],
+                "potentially": ["possibly", "likely", "prospectively", "conceivably", "plausibly"],
+                "primarily": ["mainly", "chiefly", "principally", "mostly", "predominantly"],
+                "significantly": ["importantly", "notably", "considerably", "substantially", "markedly"],
+                "similarly": ["likewise", "correspondingly", "analogously", "comparably", "equivalently"],
+                "specifically": ["particularly", "precisely", "exactly", "explicitly", "expressly"],
+                "validly": ["soundly", "cogently", "justifiably", "legitimately", "rightfully"]
+            };
+
+            // Common phrases and their alternatives
+            const phraseDatabase = {
+                "in order to": ["to", "so as to", "for the purpose of"],
+                "due to the fact that": ["because", "since", "as"],
+                "in spite of the fact that": ["although", "even though"],
+                "with regard to": ["regarding", "concerning", "about"],
+                "in the event that": ["if", "should"],
+                "at this point in time": ["now", "currently"],
+                "take into consideration": ["consider", "think about"],
+                "give rise to": ["cause", "lead to"],
+                "make reference to": ["refer to", "mention"],
+                "put forward the idea that": ["suggest", "propose"],
+                "it could be argued that": ["perhaps", "possibly"],
+                "there is no doubt that": ["undoubtedly", "certainly"],
+                "as a matter of fact": ["in fact", "actually"],
+                "in the final analysis": ["finally", "ultimately"],
+                "all things considered": ["overall", "taking everything into account"],
+                "it is important to note that": ["notably", "importantly"],
+                "the fact that": ["that", "because"],
+                "in terms of": ["regarding", "concerning"],
+                "on the other hand": ["conversely", "however"],
+                "as well as": ["and", "also"],
+                "in addition to": ["besides", "furthermore"],
+                "with respect to": ["regarding", "concerning"],
+                "in light of": ["considering", "because of"],
+                "for the most part": ["mostly", "generally"],
+                "at the present time": ["currently", "now"]
+            };
+
+            // Protected terms that shouldn't be changed (technical terms, proper nouns, etc.)
+            const protectedTerms = [
+                "climate change", "global warming", "fossil fuels", "renewable energy",
+                "social media", "real time", "power grid", "United States", "European Union",
+                "World Health Organization", "COVID-19", "Artificial Intelligence", "Machine Learning"
+            ];
+
+            function paraphrase(text, intensity) {
+                if (!text.trim()) return "";
+                
+                // First protect specific terms and phrases
+                const protectedMap = {};
                 let protectedText = text;
-                const placeholders = {};
-                let i = 0;
-                for (const phrase in protectedPhrases) {
-                    const placeholder = `__PHRASE_${i}__`;
+                
+                // Protect common phrases
+                for (const phrase in phraseDatabase) {
                     const regex = new RegExp(phrase, "gi");
-                    if (regex.test(protectedText)) {
-                        protectedText = protectedText.replace(regex, placeholder);
-                        placeholders[placeholder] = phrase;
-                        i++;
-                    }
+                    protectedText = protectedText.replace(regex, match => {
+                        const placeholder = `__PHRASE_${Object.keys(protectedMap).length}__`;
+                        protectedMap[placeholder] = match;
+                        return placeholder;
+                    });
                 }
-
-                let sentences = protectedText.match(/[^.!?]+[.!?]+/g) || [protectedText];
-                let paraphrasedSentences = [];
-
-                sentences.forEach(sentence => {
-                    let words = sentence.split(/\s+/);
-                    let replacedInSentence = false;
-                    let newSentence = words.map(word => {
-                        let original = word.toLowerCase().replace(/[.,!?;:]+$/, '');
-                        let punctuation = (word.match(/[.,!?;:]+$/) || [''])[0];
-
-                        if (Math.random() > intensity.rate && synonymMap[original]) {
-                            let synonym = synonymMap[original][Math.floor(Math.random() * synonymMap[original].length)];
-                            if (word[0] === word[0].toUpperCase()) {
-                                synonym = synonym[0].toUpperCase() + synonym.slice(1);
-                            }
-                            replacedInSentence = true;
-                            return synonym + punctuation;
-                        }
-                        return word;
-                    }).join(' ');
-                    
-                    if (!replacedInSentence) {
-                        let doc = nlp(sentence);
-                        if (doc.sentences().length > 0) {
-                            let s = doc.sentences().get(0);
-                            if (s.has('#ActiveVoice') && Math.random() > 0.5) {
-                                s.toPassive();
-                                newSentence = s.out('text');
-                            }
-                        }
-                    }
-                    paraphrasedSentences.push(newSentence);
+                
+                // Protect technical terms and proper nouns
+                protectedTerms.forEach(term => {
+                    const regex = new RegExp(term, "gi");
+                    protectedText = protectedText.replace(regex, match => {
+                        const placeholder = `__TERM_${Object.keys(protectedMap).length}__`;
+                        protectedMap[placeholder] = match;
+                        return placeholder;
+                    });
                 });
-
-                let finalText = paraphrasedSentences.join(' ');
-
-                for (const placeholder in placeholders) {
-                    const originalPhrase = placeholders[placeholder];
-                    const alternatives = protectedPhrases[originalPhrase];
-                    const chosenAlternative = alternatives[Math.floor(Math.random() * alternatives.length)];
-                    finalText = finalText.replace(new RegExp(placeholder, "g"), chosenAlternative);
+                
+                // Process the text with NLP
+                let doc = nlp(protectedText);
+                
+                // Apply transformations based on intensity
+                const { wordChangeRate, sentenceRestructureRate } = intensity;
+                
+                // 1. Change words with synonyms
+                doc.terms().forEach(term => {
+                    const word = term.text('normal');
+                    const lowerWord = word.toLowerCase();
+                    
+                    // Skip if this is a placeholder
+                    if (word.startsWith('__') && word.endsWith('__')) return;
+                    
+                    // Only change words with a certain probability based on intensity
+                    if (Math.random() < wordChangeRate && synonymDatabase[lowerWord]) {
+                        const synonyms = synonymDatabase[lowerWord];
+                        const synonym = synonyms[Math.floor(Math.random() * synonyms.length)];
+                        
+                        // Preserve capitalization
+                        if (word[0] === word[0].toUpperCase()) {
+                            term.replaceWith(synonym.charAt(0).toUpperCase() + synonym.slice(1));
+                        } else {
+                            term.replaceWith(synonym);
+                        }
+                    }
+                });
+                
+                // 2. Restructure sentences
+                doc.sentences().forEach(sentence => {
+                    if (Math.random() < sentenceRestructureRate) {
+                        const s = sentence;
+                        
+                        // Randomly choose a restructuring method
+                        const method = Math.floor(Math.random() * 4);
+                        
+                        try {
+                            switch(method) {
+                                case 0: // Active to passive or vice versa
+                                    if (s.has('#ActiveVoice')) {
+                                        s.toPassive();
+                                    } else if (s.has('#PassiveVoice')) {
+                                        s.toActive();
+                                    }
+                                    break;
+                                case 1: // Change word order (move adverbs, prepositional phrases)
+                                    const adverbs = s.match('#Adverb').out('array');
+                                    if (adverbs.length > 0) {
+                                        const adverb = adverbs[0];
+                                        s.replace(adverb, ''); // Remove first
+                                        if (Math.random() > 0.5) {
+                                            s.prepend(adverb + ' '); // Put at beginning
+                                        } else {
+                                            s.append(' ' + adverb); // Put at end
+                                        }
+                                    }
+                                    break;
+                                case 2: // Change sentence structure (compound to complex or vice versa)
+                                    const clauses = s.clauses();
+                                    if (clauses.length > 1) {
+                                        // For simplicity, just join with "and" or split
+                                        if (Math.random() > 0.5) {
+                                            s.text(s.text().replace(/,\s*/g, ' and '));
+                                        } else {
+                                            s.text(s.text().replace(/ and /g, ', '));
+                                        }
+                                    }
+                                    break;
+                                case 3: // Change between positive and negative forms
+                                    const negations = s.match('#Negative').out('array');
+                                    if (negations.length > 0) {
+                                        // Remove negation and find antonym of main verb
+                                        s.negative(false);
+                                        const verbs = s.verbs();
+                                        if (verbs.length > 0) {
+                                            const verb = verbs[0];
+                                            const antonym = findAntonym(verb.text('normal'));
+                                            if (antonym) {
+                                                verb.replaceWith(antonym);
+                                            }
+                                        }
+                                    } else {
+                                        // Add negation and find antonym of main verb
+                                        const verbs = s.verbs();
+                                        if (verbs.length > 0) {
+                                            const verb = verbs[0];
+                                            const antonym = findAntonym(verb.text('normal'));
+                                            if (antonym) {
+                                                verb.replaceWith(antonym);
+                                                s.negative(true);
+                                            }
+                                        }
+                                    }
+                                    break;
+                            }
+                        } catch (e) {
+                            console.log("Error restructuring sentence:", e);
+                        }
+                    }
+                });
+                
+                // Convert back to text
+                let result = doc.text();
+                
+                // Restore protected phrases and terms
+                for (const placeholder in protectedMap) {
+                    result = result.replace(new RegExp(placeholder, 'g'), protectedMap[placeholder]);
                 }
-
-                return finalText || text;
+                
+                // Post-processing: fix common issues
+                result = result.replace(/\s+([.,;:!?])/g, '$1'); // Remove space before punctuation
+                result = result.replace(/([a-z])\s*-\s*([a-z])/gi, '$1-$2'); // Fix hyphen spacing
+                result = result.replace(/(\w)\s+'\s+(\w)/g, "$1'$2"); // Fix apostrophes
+                
+                // Capitalize first letter of each sentence
+                result = result.replace(/(^|[.!?]\s+)([a-z])/g, (match, p1, p2) => p1 + p2.toUpperCase());
+                
+                return result;
+            }
+            
+            // Simple antonym finder (could be expanded)
+            function findAntonym(word) {
+                const antonyms = {
+                    "increase": "decrease",
+                    "decrease": "increase",
+                    "improve": "worsen",
+                    "worsen": "improve",
+                    "support": "oppose",
+                    "oppose": "support",
+                    "agree": "disagree",
+                    "disagree": "agree",
+                    "accept": "reject",
+                    "reject": "accept",
+                    "include": "exclude",
+                    "exclude": "include",
+                    "prove": "disprove",
+                    "disprove": "prove",
+                    "confirm": "deny",
+                    "deny": "confirm",
+                    "like": "dislike",
+                    "dislike": "like",
+                    "love": "hate",
+                    "hate": "love",
+                    "begin": "end",
+                    "end": "begin",
+                    "start": "stop",
+                    "stop": "start"
+                };
+                return antonyms[word.toLowerCase()] || null;
             }
 
             paraphraseBtn.addEventListener('click', function() {
@@ -618,10 +812,10 @@
                     try {
                         const selectedIntensity = intensityLevels[intensitySlider.value];
                         const result = paraphrase(text, selectedIntensity);
-                        outputText.value = result;
+                        outputText.value = result || "No changes were made. Try increasing the intensity.";
                     } catch (error) {
                         console.error("Paraphrasing error:", error);
-                        outputText.value = "Sorry, a critical error occurred. Please try again.";
+                        outputText.value = "An error occurred while paraphrasing. Please try again.";
                     } finally {
                         paraphraseBtn.disabled = false;
                         paraphraseBtn.textContent = 'Paraphrase Text';
