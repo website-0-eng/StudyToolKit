@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Text Summarizer - Online Article Summarizer | StudyToolKit</title>
+    <meta name="description" content="Our free text summarizer helps you condense articles, papers, and essays. Extract key points and summarize text online to save time on reading and research.">
+    <meta name="keywords" content="text summarizer, free text summarizer, article summarizer, summarize text online, summary generator, key point extractor, academic summary tool, online summarizer, research paper summarizer, essay summarizer">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Free Text Summarizer - Online Article Summarizer | StudyToolKit">
+    <meta property="og:description" content="Condense articles, papers, and other long texts into a short summary with our free online tool. Perfect for students and researchers.">
+    <meta property="og:type" content="website">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Text Summarizer",
+        "description": "Free online article and text summarizer to extract key points and generate a concise summary for students and researchers.",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "StudyToolKit"
+        }
+    }
+    </script>
+    <style>
+        /* All the same CSS styles from index.html */
+        :root {
+            --primary-color: #4f46e5;
+            --primary-light: #6366f1;
+            --text-color: #1e293b;
+            --text-light: #64748b;
+            --bg-color: #ffffff;
+            --bg-light: #f8fafc;
+            --border-radius: 8px;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --transition: all 0.2s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            color: var(--text-color);
+            background-color: var(--bg-light);
+            line-height: 1.5;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .header {
+            background-color: var(--bg-color);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .logo-svg {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Tool Page Styles */
+        .tool-container {
+            background-color: var(--bg-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .tool-header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .tool-header h1 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-header p {
+            color: var(--text-light);
+        }
+
+        .input-area, .output-area {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-area textarea, .output-area textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        .input-area textarea:focus, .output-area textarea:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .tool-actions {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem 0;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-light);
+        }
+
+        select {
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            border: 1px solid #e2e8f0;
+            font-family: inherit;
+        }
+
+        .seo-content {
+            margin-top: 3rem;
+        }
+
+        .seo-content h2 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .seo-content h3 {
+            margin: 1.5rem 0 0.5rem;
+            color: var(--text-color);
+        }
+
+        .seo-content p, .seo-content li {
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 1rem;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            color: var(--text-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            padding-top: 0.5rem;
+            color: var(--text-light);
+            display: none;
+        }
+
+        .faq-answer.show {
+            display: block;
+        }
+
+        .footer {
+            background-color: var(--bg-color);
+            padding: 2rem 0;
+            margin-top: 3rem;
+            box-shadow: 0 -1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .footer nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .cookie-notice {
+            position: fixed;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--bg-color);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            max-width: 90%;
+            z-index: 1000;
+        }
+
+        .cookie-notice p {
+            margin: 0;
+            color: var(--text-light);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav ul {
+                gap: 1rem;
+            }
+
+            .tool-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer .container {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .footer nav ul {
+                justify-content: center;
+            }
+
+            .cookie-notice {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-svg">STK</div>
+                <span>StudyToolKit</span>
+            </a>
+            <nav class="nav">
+                <ul>
+                    <li><a href="paraphraser.html">Paraphrasing Tool</a></li>
+                    <li><a href="summarizer.html">Text Summarizer</a></li>
+                    <li><a href="citation-generator.html">Citation Generator</a></li>
+                    <li><a href="word-to-pdf.html">Word to PDF</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="tool-container">
+            <div class="tool-header">
+                <h1>Online Text Summarizer</h1>
+                <p>Summarize articles, essays, and research papers to get the key points instantly.</p>
+            </div>
+
+            <div class="input-area">
+                <textarea id="input-text" placeholder="Paste your text here to create a summary..."></textarea>
+            </div>
+
+            <div class="tool-actions">
+                <button id="summarize-btn" class="btn">Summarize Text</button>
+                <select id="summary-length">
+                    <option value="short">Short Summary</option>
+                    <option value="medium" selected>Medium Summary</option>
+                    <option value="long">Long Summary</option>
+                </select>
+            </div>
+
+            <div class="output-area">
+                <h3>Your Generated Summary</h3>
+                <textarea id="output-text" placeholder="The concise summary will appear here..." readonly></textarea>
+            </div>
+        </section>
+
+        <section class="seo-content">
+            <h2>An Article Summarizer for Students and Researchers</h2>
+            <p>Our free summary generator is an essential tool for anyone who needs to quickly understand the main ideas of a long piece of text. This tool helps you summarize articles online, making it easier to digest complex information for your studies, research, or general reading.</p>
+            
+            <h3>How to Summarize Text Online</h3>
+            <ol>
+                <li>Paste the text from your article, paper, or document into the input box.</li>
+                <li>Choose your desired summary length (Short, Medium, or Long).</li>
+                <li>Click the "Summarize Text" button to generate the summary.</li>
+                <li>Copy the key points for your notes or academic work.</li>
+            </ol>
+            
+            <h3>Benefits of Using a Summary Generator</h3>
+            <ul>
+                <li><h4>Save Critical Time:</h4> Quickly process long readings and focus on the most important information.</li>
+                <li><h4>Improve Understanding:</h4> By identifying the core arguments, you can improve your comprehension.</li>
+                <li><h4>Efficient Note-Taking:</h4> Use the generated summary as a starting point for your own notes.</li>
+            </ul>
+            
+            <div class="faq-section">
+                <h3>Frequently Asked Questions</h3>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How does this article summarizer work?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our tool uses a TF-IDF (Term Frequency-Inverse Document Frequency) algorithm. It analyzes the text to find the sentences that are most statistically relevant and important to the overall topic, then combines them to create a coherent summary.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is this summary generator free?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, our online summarizer is 100% free to use. There are no limits or registration requirements.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I summarize text from a PDF?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You will need to copy the text from the PDF file and paste it into our tool. The summarizer does not directly support file uploads.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 StudyToolKit. All rights reserved.</p>
+            <nav>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+
+    <div class="cookie-notice">
+        <p>We use cookies to improve your experience. By continuing, you agree to our use of cookies.</p>
+        <button class="btn" id="accept-cookies">Accept</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const summarizeBtn = document.getElementById('summarize-btn');
+            const inputText = document.getElementById('input-text');
+            const outputText = document.getElementById('output-text');
+            const summaryLength = document.getElementById('summary-length');
+            const acceptCookiesBtn = document.getElementById('accept-cookies');
+            const cookieNotice = document.querySelector('.cookie-notice');
+
+            if (cookieNotice) {
+                if (!localStorage.getItem('cookiesAccepted')) {
+                    cookieNotice.style.display = 'flex';
+                }
+                acceptCookiesBtn.addEventListener('click', function() {
+                    localStorage.setItem('cookiesAccepted', 'true');
+                    cookieNotice.style.display = 'none';
+                });
+            }
+
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            if (faqQuestions.length > 0) {
+                faqQuestions.forEach(question => {
+                    question.addEventListener('click', function() {
+                        const answer = this.nextElementSibling;
+                        const isShowing = answer.classList.contains('show');
+                        document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('show'));
+                        if (!isShowing) {
+                            answer.classList.toggle('show');
+                        }
+                    });
+                });
+            }
+
+            function summarize(text, length = 'medium') {
+                const stopWords = new Set(["a", "about", "above", "after", "again", "against", "all", "am", "an", "and", "any", "are", "as", "at", "be", "because", "been", "before", "being", "below", "between", "both", "but", "by", "can't", "cannot", "could", "did", "do", "does", "doing", "down", "during", "each", "few", "for", "from", "further", "had", "has", "have", "having", "he", "her", "here", "hers", "herself", "him", "himself", "his", "how", "i", "if", "in", "into", "is", "it", "its", "itself", "me", "more", "most", "my", "myself", "no", "nor", "not", "of", "off", "on", "once", "only", "or", "other", "our", "ours", "ourselves", "out", "over", "own", "same", "she", "should", "so", "some", "such", "than", "that", "the", "their", "theirs", "them", "themselves", "then", "there", "these", "they", "this", "those", "through", "to", "too", "under", "until", "up", "very", "was", "we", "were", "what", "when", "where", "which", "while", "who", "whom", "why", "with", "would", "you", "your", "yours", "yourself", "yourselves"]);
+                const sentences = text.match(/[^.!?]+[.!?]+/g) || [];
+                if (sentences.length <= 2) return text;
+
+                const getWords = (sentence) => (sentence.match(/\b\w+\b/g) || []).map(w => w.toLowerCase()).filter(w => !stopWords.has(w));
+                
+                const sentenceWordLists = sentences.map(s => getWords(s));
+
+                const idf = (word, allSentencesWords) => {
+                    const numSentencesWithWord = allSentencesWords.filter(swl => swl.includes(word)).length;
+                    return Math.log(allSentencesWords.length / (1 + numSentencesWithWord));
+                };
+
+                const sentenceScores = sentences.map((sentence, i) => {
+                    const sentenceWords = sentenceWordLists[i];
+                    if (sentenceWords.length === 0) return { sentence, score: 0, index: i };
+                    
+                    const tfScores = sentenceWords.reduce((acc, word) => {
+                        acc[word] = (acc[word] || 0) + 1;
+                        return acc;
+                    }, {});
+
+                    const score = Object.keys(tfScores).reduce((acc, word) => {
+                        const tf = tfScores[word] / sentenceWords.length;
+                        const idfScore = idf(word, sentenceWordLists);
+                        return acc + (tf * idfScore);
+                    }, 0);
+                    
+                    return { sentence, score, index: i };
+                });
+
+                sentenceScores.sort((a, b) => b.score - a.score);
+
+                let summarySentenceCount;
+                switch (length) {
+                    case 'short': summarySentenceCount = Math.max(1, Math.floor(sentences.length * 0.25)); break;
+                    case 'long': summarySentenceCount = Math.max(2, Math.floor(sentences.length * 0.75)); break;
+                    default: summarySentenceCount = Math.max(1, Math.floor(sentences.length * 0.5)); break;
+                }
+
+                const topSentences = sentenceScores.slice(0, summarySentenceCount);
+                topSentences.sort((a, b) => a.index - b.index);
+
+                return topSentences.map(s => s.sentence.trim()).join(' ');
+            }
+
+            summarizeBtn.addEventListener('click', function() {
+                const text = inputText.value.trim();
+                const length = summaryLength.value;
+
+                if (!text) {
+                    alert('Please enter some text to summarize');
+                    return;
+                }
+
+                summarizeBtn.disabled = true;
+                summarizeBtn.textContent = 'Summarizing...';
+
+                setTimeout(() => {
+                    try {
+                        const result = summarize(text, length);
+                        outputText.value = result;
+                    } catch (error) {
+                        console.error("Summarization error:", error);
+                        outputText.value = "Sorry, an error occurred during summarization.";
+                    } finally {
+                        summarizeBtn.disabled = false;
+                        summarizeBtn.textContent = 'Summarize Text';
+                    }
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>

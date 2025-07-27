@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free File to PDF Converter | StudyToolKit</title>
+    <meta name="description" content="Convert your DOCX, PPTX, XLSX, TXT, and images to PDF format instantly with our free online converter. No watermarks, no registration required.">
+    <meta name="keywords" content="free word to pdf converter, online docx to pdf, convert word to pdf, document converter, word document to pdf, microsoft word to pdf, doc to pdf converter, online file converter, student file converter, academic document converter, word to pdf no watermark, word to pdf free online, docx to pdf converter, office document converter, study file converter, research paper converter, essay file converter, thesis document converter, paper format converter, word to pdf web app, browser-based pdf converter, secure document conversion, privacy-focused converter, no registration converter, docx to pdf online free, word to pdf student tool, academic file converter, homework file converter, assignment submission tool, document format converter, word processor to pdf, office to pdf converter, school file converter, university document converter, college file tool, study document converter, research file converter, paper submission tool, essay submission converter, thesis format converter, dissertation file converter, report converter, academic paper converter, writing submission tool, education file converter, learning document tool, student resources converter">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Free File to PDF Converter | StudyToolKit">
+    <meta property="og:description" content="Convert your documents to PDF format instantly with our free online converter. No watermarks, no registration.">
+    <meta property="og:type" content="website">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "File to PDF Converter",
+        "description": "Free online tool to convert various file formats to PDF instantly.",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "StudyToolKit"
+        }
+    }
+    </script>
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --primary-light: #6366f1;
+            --text-color: #1e293b;
+            --text-light: #64748b;
+            --bg-color: #ffffff;
+            --bg-light: #f8fafc;
+            --border-radius: 8px;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --transition: all 0.2s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            color: var(--text-color);
+            background-color: var(--bg-light);
+            line-height: 1.5;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .header {
+            background-color: var(--bg-color);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .logo-svg {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Tool Page Styles */
+        .tool-container {
+            background-color: var(--bg-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .tool-header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .tool-header h1 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-header p {
+            color: var(--text-light);
+        }
+
+        .file-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            border: 2px dashed #e2e8f0;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary-light);
+        }
+
+        .file-upload input {
+            display: none;
+        }
+
+        .file-upload-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+        }
+
+        .file-upload-icon {
+            width: 3rem;
+            height: 3rem;
+            color: var(--primary-color);
+            font-size: 3rem;
+        }
+
+        .file-info {
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .tool-actions {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-light);
+        }
+
+        .btn:disabled {
+            background-color: #cbd5e1;
+            cursor: not-allowed;
+        }
+
+        .output-area {
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .seo-content {
+            margin-top: 3rem;
+        }
+
+        .seo-content h2 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .seo-content h3 {
+            margin: 1.5rem 0 0.5rem;
+            color: var(--text-color);
+        }
+
+        .seo-content p, .seo-content li {
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 1rem;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            color: var(--text-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            padding-top: 0.5rem;
+            color: var(--text-light);
+            display: none;
+        }
+
+        .faq-answer.show {
+            display: block;
+        }
+
+        .footer {
+            background-color: var(--bg-color);
+            padding: 2rem 0;
+            margin-top: 3rem;
+            box-shadow: 0 -1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .footer nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .cookie-notice {
+            position: fixed;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--bg-color);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            max-width: 90%;
+            z-index: 1000;
+        }
+
+        .cookie-notice p {
+            margin: 0;
+            color: var(--text-light);
+        }
+
+        /* Progress bar */
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background-color: #e2e8f0;
+            border-radius: 4px;
+            margin: 1rem 0;
+            display: none;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* File type indicator */
+        .file-type {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background-color: #e2e8f0;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+            color: var(--text-color);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav ul {
+                gap: 1rem;
+            }
+
+            .footer .container {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .footer nav ul {
+                justify-content: center;
+            }
+
+            .cookie-notice {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+    <!-- Include necessary libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.0/mammoth.browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-svg">STK</div>
+                <span>StudyToolKit</span>
+            </a>
+            <nav class="nav">
+                <ul>
+                    <li><a href="paraphraser.html">Paraphrasing Tool</a></li>
+                    <li><a href="summarizer.html">Text Summarizer</a></li>
+                    <li><a href="citation-generator.html">Citation Generator</a></li>
+                    <li><a href="word-to-pdf.html">Word to PDF</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="tool-container">
+            <div class="tool-header">
+                <h1>File to PDF Converter</h1>
+                <p>Convert your documents (DOCX, PPTX, XLSX, TXT, JPG, PNG) to PDF format instantly</p>
+            </div>
+
+            <div class="file-upload" id="drop-area">
+                <input type="file" id="file-input" accept=".docx,.pptx,.xlsx,.txt,.jpg,.jpeg,.png">
+                <label for="file-input" class="file-upload-label">
+                    <div class="file-upload-icon">📄</div>
+                    <span>Choose a file or drag it here</span>
+                </label>
+                <div class="file-info" id="file-info">No file selected</div>
+            </div>
+
+            <div class="progress-container" id="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
+            <div class="tool-actions">
+                <button id="convert-btn" class="btn" disabled>Convert to PDF</button>
+            </div>
+
+            <div class="output-area" id="output-area">
+                <h3>Conversion Complete</h3>
+                <p>Your PDF is ready to download.</p>
+                <button id="download-btn" class="btn">Download PDF</button>
+            </div>
+        </section>
+
+        <section class="seo-content">
+            <h2>About Our File to PDF Converter</h2>
+            <p>Our free File to PDF converter allows you to quickly transform various document formats into PDF without installing any software. Perfect for students who need to submit assignments in PDF format or researchers sharing papers that need to maintain their formatting across devices.</p>
+            
+            <h3>Supported File Formats</h3>
+            <ul>
+                <li><strong>Word Documents:</strong> DOCX (Microsoft Word)</li>
+                <li><strong>Presentations:</strong> PPTX (Microsoft PowerPoint)</li>
+                <li><strong>Spreadsheets:</strong> XLSX (Microsoft Excel)</li>
+                <li><strong>Text Files:</strong> TXT (Plain Text)</li>
+                <li><strong>Images:</strong> JPG, JPEG, PNG</li>
+            </ul>
+            
+            <h3>How to Convert Files to PDF</h3>
+            <ol>
+                <li>Click the upload area or drag your file into the box</li>
+                <li>Wait for the file to process (this happens in your browser)</li>
+                <li>Click the "Download PDF" button to save your converted file</li>
+            </ol>
+            
+            <h3>Benefits of PDF Format</h3>
+            <ul>
+                <li>Preserves document formatting across devices</li>
+                <li>More secure than editable formats</li>
+                <li>Standard format for academic submissions</li>
+                <li>Smaller file sizes than original documents</li>
+                <li>Universally readable with free PDF viewers</li>
+            </ul>
+            
+            <div class="faq-section">
+                <h3>Frequently Asked Questions</h3>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is there a file size limit?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>For optimal performance, we recommend files under 10MB. Very large documents may take longer to process or might not convert properly.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Are my files stored on your servers?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No, all conversion happens in your browser. We never upload your files to any server, ensuring complete privacy.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Does the converter preserve complex formatting?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Basic formatting is preserved, but complex layouts (especially in PowerPoint and Excel files) may not convert perfectly. We recommend checking the PDF before submission.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I convert multiple files at once?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Currently, our converter processes one file at a time. For multiple files, you'll need to convert them individually.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 StudyToolKit. All rights reserved.</p>
+            <nav>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+
+    <div class="cookie-notice">
+        <p>We use cookies to improve your experience. By continuing, you agree to our use of cookies.</p>
+        <button class="btn" id="accept-cookies">Accept</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('file-input');
+            const dropArea = document.getElementById('drop-area');
+            const fileInfo = document.getElementById('file-info');
+            const convertBtn = document.getElementById('convert-btn');
+            const outputArea = document.getElementById('output-area');
+            const downloadBtn = document.getElementById('download-btn');
+            const progressContainer = document.getElementById('progress-container');
+            const progressBar = document.getElementById('progress-bar');
+
+            let selectedFile = null;
+            let pdfBlob = null;
+
+            const cookieNotice = document.querySelector('.cookie-notice');
+            if (cookieNotice && !localStorage.getItem('cookiesAccepted')) {
+                cookieNotice.style.display = 'flex';
+            }
+            if (cookieNotice) {
+                document.getElementById('accept-cookies').addEventListener('click', () => {
+                    localStorage.setItem('cookiesAccepted', 'true');
+                    cookieNotice.style.display = 'none';
+                });
+            }
+
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    const isShowing = answer.classList.contains('show');
+                    document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('show'));
+                    if (!isShowing) answer.classList.add('show');
+                });
+            });
+
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                dropArea.addEventListener(eventName, e => { e.preventDefault(); e.stopPropagation(); }, false);
+            });
+            ['dragenter', 'dragover'].forEach(eventName => dropArea.addEventListener(eventName, () => dropArea.style.borderColor = 'var(--primary-color)', false));
+            ['dragleave', 'drop'].forEach(eventName => dropArea.addEventListener(eventName, () => dropArea.style.borderColor = '#e2e8f0', false));
+            dropArea.addEventListener('drop', e => handleFiles(e.dataTransfer.files), false);
+            fileInput.addEventListener('change', () => handleFiles(fileInput.files));
+
+            function handleFiles(files) {
+                if (!files.length) return;
+                const file = files[0];
+                const validExtensions = ['.docx', '.txt', '.jpg', '.jpeg', '.png'];
+                const fileExt = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+
+                if (!validExtensions.includes(fileExt)) {
+                    alert('Unsupported file type. Please select a DOCX, TXT, or image file.');
+                    return;
+                }
+                selectedFile = file;
+                fileInfo.innerHTML = `${file.name} <span class="file-type">${fileExt.toUpperCase().replace('.', '')}</span>`;
+                convertBtn.disabled = false;
+                outputArea.style.display = 'none';
+            }
+
+            const updateProgress = (value) => progressBar.style.width = `${value}%`;
+
+            async function convertToPdf(file) {
+                const fileExt = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+                
+                const style = `
+                    body { font-family: 'Times New Roman', Times, serif; line-height: 1.5; }
+                    h1 { font-size: 24pt; font-weight: bold; margin-bottom: 18pt; }
+                    h2 { font-size: 18pt; font-weight: bold; margin-bottom: 14pt; }
+                    p { font-size: 12pt; margin-bottom: 12pt; }
+                    ul, ol { padding-left: 20pt; }
+                    li { font-size: 12pt; margin-bottom: 6pt; }
+                `;
+
+                let element = document.createElement('div');
+                element.style.width = '210mm'; // A4 width
+                element.style.padding = '20mm';
+                element.style.boxSizing = 'border-box';
+
+                if (fileExt === '.docx') {
+                    const arrayBuffer = await file.arrayBuffer();
+                    const result = await mammoth.convertToHtml({ arrayBuffer });
+                    element.innerHTML = `<style>${style}</style>${result.value}`;
+                } else if (fileExt === '.txt') {
+                    const text = await file.text();
+                    element.innerHTML = `<style>${style}</style><pre style="white-space: pre-wrap; font-family: 'Courier New', Courier, monospace;">${text}</pre>`;
+                } else if (['.jpg', '.jpeg', '.png'].includes(fileExt)) {
+                    const dataUrl = await new Promise(resolve => {
+                        const reader = new FileReader();
+                        reader.onload = e => resolve(e.target.result);
+                        reader.readAsDataURL(file);
+                    });
+                    element.innerHTML = `<img src="${dataUrl}" style="max-width: 100%;">`;
+                } else {
+                    throw new Error("Unsupported file type.");
+                }
+                
+                const opt = {
+                    margin: 0,
+                    filename: file.name.replace(/\.[^/.]+$/, '') + '.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2, useCORS: true },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                };
+
+                return html2pdf().from(element).set(opt).outputPdf('blob');
+            }
+
+            convertBtn.addEventListener('click', async function() {
+                if (!selectedFile) return;
+                convertBtn.disabled = true;
+                convertBtn.textContent = 'Converting...';
+                progressContainer.style.display = 'block';
+                updateProgress(0);
+
+                try {
+                    const worker = html2pdf();
+                    worker.from(document.createElement('div')).set({
+                        onprogress: (e) => updateProgress(e.progress)
+                    });
+                    
+                    pdfBlob = await convertToPdf(selectedFile);
+                    
+                    if (!pdfBlob) throw new Error('Conversion failed');
+                    
+                    updateProgress(100);
+                    outputArea.style.display = 'block';
+                    setTimeout(() => progressContainer.style.display = 'none', 1000);
+
+                } catch (error) {
+                    console.error('Conversion error:', error);
+                    alert(`Error converting file: ${error.message}. Please try again.`);
+                    progressContainer.style.display = 'none';
+                } finally {
+                    convertBtn.disabled = false;
+                    convertBtn.textContent = 'Convert to PDF';
+                }
+            });
+
+            downloadBtn.addEventListener('click', function() {
+                if (!pdfBlob || !selectedFile) return;
+                const newFileName = selectedFile.name.replace(/\.[^/.]+$/, '') + '.pdf';
+                saveAs(pdfBlob, newFileName);
+            });
+        });
+    </script>
+</body>
+</html>

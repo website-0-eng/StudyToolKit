@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free APA/MLA Citation Generator | StudyToolKit</title>
+    <meta name="description" content="Generate perfect APA and MLA citations for books, articles, and websites with our free citation tool. Save time on your bibliography and works cited pages.">
+    <meta name="keywords" content="free citation generator, APA citation maker, MLA citation tool, bibliography generator, works cited creator, academic citation tool, reference generator, book citation tool, article citation maker, website citation generator, research paper citations, essay citation helper, online citation machine, automatic citation creator, citation format helper, APA 7th edition generator, MLA 8th edition generator, citation builder, academic reference tool, study citation helper, paper writing tool, bibliography creator, citation format generator, reference list maker, citation style formatter, student citation tool, citation machine, reference generator, academic formatting tool, research citation helper, essay reference tool, paper citation generator, thesis citation maker, dissertation reference tool, academic writing helper, citation style generator, bibliography maker, works cited page generator, in-text citation creator, reference list generator, citation formatter, academic paper helper, research reference tool, writing citation assistant, source citation generator, citation style assistant, reference builder, citation helper tool, academic citation assistant, research paper reference tool">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Free APA/MLA Citation Generator | StudyToolKit">
+    <meta property="og:description" content="Generate perfect APA and MLA citations for books, articles, and websites with our free citation tool.">
+    <meta property="og:type" content="website">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Citation Generator",
+        "description": "Free online tool to generate APA and MLA citations for books, articles, and websites.",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "StudyToolKit"
+        }
+    }
+    </script>
+    <style>
+        /* All the same CSS styles from index.html */
+        :root {
+            --primary-color: #4f46e5;
+            --primary-light: #6366f1;
+            --text-color: #1e293b;
+            --text-light: #64748b;
+            --bg-color: #ffffff;
+            --bg-light: #f8fafc;
+            --border-radius: 8px;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --transition: all 0.2s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            color: var(--text-color);
+            background-color: var(--bg-light);
+            line-height: 1.5;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .header {
+            background-color: var(--bg-color);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .logo-svg {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Tool Page Styles */
+        .tool-container {
+            background-color: var(--bg-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .tool-header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .tool-header h1 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-header p {
+            color: var(--text-light);
+        }
+
+        .input-area {
+            margin-bottom: 1.5rem;
+        }
+
+        .citation-type-selector, .source-type-selector {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        select, input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            margin-bottom: 1rem;
+        }
+
+        .citation-fields {
+            display: none;
+        }
+
+        .citation-fields.active {
+            display: block;
+        }
+
+        .output-area textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        .tool-actions {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-light);
+        }
+
+        .seo-content {
+            margin-top: 3rem;
+        }
+
+        .seo-content h2 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .seo-content h3 {
+            margin: 1.5rem 0 0.5rem;
+            color: var(--text-color);
+        }
+
+        .seo-content p, .seo-content li {
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 1rem;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            color: var(--text-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            padding-top: 0.5rem;
+            color: var(--text-light);
+            display: none;
+        }
+
+        .faq-answer.show {
+            display: block;
+        }
+
+        .footer {
+            background-color: var(--bg-color);
+            padding: 2rem 0;
+            margin-top: 3rem;
+            box-shadow: 0 -1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .footer nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .cookie-notice {
+            position: fixed;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--bg-color);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            max-width: 90%;
+            z-index: 1000;
+        }
+
+        .cookie-notice p {
+            margin: 0;
+            color: var(--text-light);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav ul {
+                gap: 1rem;
+            }
+
+            .footer .container {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .footer nav ul {
+                justify-content: center;
+            }
+
+            .cookie-notice {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-svg">STK</div>
+                <span>StudyToolKit</span>
+            </a>
+            <nav class="nav">
+                <ul>
+                    <li><a href="paraphraser.html">Paraphrasing Tool</a></li>
+                    <li><a href="summarizer.html">Text Summarizer</a></li>
+                    <li><a href="citation-generator.html">Citation Generator</a></li>
+                    <li><a href="word-to-pdf.html">Word to PDF</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="tool-container">
+            <div class="tool-header">
+                <h1>Citation Generator</h1>
+                <p>Create perfect APA and MLA citations for books, articles, and websites</p>
+            </div>
+
+            <div class="input-area">
+                <div class="citation-type-selector">
+                    <label for="citation-style">Citation Style:</label>
+                    <select id="citation-style">
+                        <option value="apa">APA (7th Edition)</option>
+                        <option value="mla">MLA (8th Edition)</option>
+                        <option value="chicago">Chicago (17th Edition)</option>
+                    </select>
+                </div>
+
+                <div class="source-type-selector">
+                    <label for="source-type">Source Type:</label>
+                    <select id="source-type">
+                        <option value="book">Book</option>
+                        <option value="article">Journal Article</option>
+                        <option value="website">Website</option>
+                        <option value="thesis">Thesis / Dissertation</option>
+                    </select>
+                </div>
+
+                <div id="book-fields" class="citation-fields active">
+                    <input type="text" id="book-title" placeholder="Book Title" required>
+                    <input type="text" id="author" placeholder="Author (Last, First)" required>
+                    <input type="text" id="year" placeholder="Year" required>
+                    <input type="text" id="publisher" placeholder="Publisher" required>
+                </div>
+
+                <div id="article-fields" class="citation-fields">
+                    <input type="text" id="article-title" placeholder="Article Title" required>
+                    <input type="text" id="author-article" placeholder="Author (Last, First)" required>
+                    <input type="text" id="year-article" placeholder="Year" required>
+                    <input type="text" id="journal" placeholder="Journal Name" required>
+                    <input type="text" id="volume" placeholder="Volume">
+                    <input type="text" id="issue" placeholder="Issue">
+                    <input type="text" id="pages" placeholder="Page Numbers" required>
+                    <input type="text" id="doi" placeholder="DOI (if available)">
+                </div>
+
+                <div id="website-fields" class="citation-fields">
+                    <input type="text" id="page-title" placeholder="Page Title" required>
+                    <input type="text" id="author-website" placeholder="Author (Last, First)">
+                    <input type="text" id="website-name" placeholder="Website Name" required>
+                    <input type="text" id="year-website" placeholder="Publication Year">
+                    <input type="text" id="url" placeholder="URL" required>
+                    <input type="text" id="publish-date" placeholder="Publication Date (YYYY-MM-DD)">
+                </div>
+
+                <div id="thesis-fields" class="citation-fields">
+                    <input type="text" id="thesis-title" placeholder="Thesis/Dissertation Title" required>
+                    <input type="text" id="author-thesis" placeholder="Author (Last, First)" required>
+                    <input type="text" id="year-thesis" placeholder="Year" required>
+                    <input type="text" id="university" placeholder="University" required>
+                    <input type="text" id="degree-level" placeholder="Degree Level (e.g., PhD diss., Master's thesis)" required>
+                </div>
+            </div>
+
+            <div class="tool-actions">
+                <button id="generate-citation-btn" class="btn">Generate Citation</button>
+            </div>
+
+            <div class="output-area">
+                <h3>Generated Citation</h3>
+                <textarea id="output-text" placeholder="Your citation will appear here..." readonly></textarea>
+            </div>
+        </section>
+
+        <section class="seo-content">
+            <h2>About Our Citation Generator</h2>
+            <p>Our free citation generator helps students and researchers create perfectly formatted APA and MLA citations for books, journal articles, and websites. Whether you're working on a research paper, thesis, or essay, this tool ensures your references meet academic standards without the hassle of manual formatting.</p>
+            
+            <h3>How to Use the Citation Generator</h3>
+            <ol>
+                <li>Select your preferred citation style (APA or MLA)</li>
+                <li>Choose the type of source you're citing (book, article, or website)</li>
+                <li>Fill in the required information about your source</li>
+                <li>Click the "Generate Citation" button</li>
+                <li>Copy the formatted citation to your bibliography or works cited page</li>
+            </ol>
+            
+            <h3>Why Proper Citations Matter</h3>
+            <ul>
+                <li>Avoid plagiarism by giving credit to original authors</li>
+                <li>Meet academic integrity requirements</li>
+                <li>Help readers locate your sources</li>
+                <li>Demonstrate the depth of your research</li>
+                <li>Maintain consistency in your reference list</li>
+            </ul>
+            
+            <div class="faq-section">
+                <h3>Frequently Asked Questions</h3>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Which citation styles are supported?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Currently, we support APA (7th edition) and MLA (8th edition) styles. These are the most commonly used formats in academic writing.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I cite sources other than books, articles and websites?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our current version focuses on these three common source types. For other sources like videos, interviews, or legal documents, you may need to consult style guides.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How accurate are the generated citations?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our citations follow the latest style guidelines, but we recommend double-checking against official style manuals, especially for complex sources.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you store the information I enter?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No, all processing happens in your browser. We don't store any of the information you enter about your sources.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 StudyToolKit. All rights reserved.</p>
+            <nav>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+
+    <div class="cookie-notice">
+        <p>We use cookies to improve your experience. By continuing, you agree to our use of cookies.</p>
+        <button class="btn" id="accept-cookies">Accept</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const generateBtn = document.getElementById('generate-citation-btn');
+            const outputText = document.getElementById('output-text');
+            const citationStyle = document.getElementById('citation-style');
+            const sourceType = document.getElementById('source-type');
+            const acceptCookiesBtn = document.getElementById('accept-cookies');
+            const cookieNotice = document.querySelector('.cookie-notice');
+            
+            if (!localStorage.getItem('cookiesAccepted')) {
+                cookieNotice.style.display = 'flex';
+            }
+            
+            acceptCookiesBtn.addEventListener('click', function() {
+                localStorage.setItem('cookiesAccepted', 'true');
+                cookieNotice.style.display = 'none';
+            });
+            
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            if (faqQuestions.length > 0) {
+                faqQuestions.forEach(question => {
+                    question.addEventListener('click', function() {
+                        const answer = this.nextElementSibling;
+                        answer.classList.toggle('show');
+                    });
+                });
+            }
+            
+            const fieldContainers = {
+                book: document.getElementById('book-fields'),
+                article: document.getElementById('article-fields'),
+                website: document.getElementById('website-fields'),
+                thesis: document.getElementById('thesis-fields')
+            };
+            
+            sourceType.addEventListener('change', function() {
+                Object.values(fieldContainers).forEach(fc => fc.classList.remove('active'));
+                if (fieldContainers[this.value]) {
+                    fieldContainers[this.value].classList.add('active');
+                }
+            });
+            
+            function generateCitation() {
+                const style = citationStyle.value;
+                const type = sourceType.value;
+                let citation = '';
+
+                try {
+                    if (type === 'book') {
+                        const title = document.getElementById('book-title').value.trim();
+                        const author = document.getElementById('author').value.trim();
+                        const year = document.getElementById('year').value.trim();
+                        const publisher = document.getElementById('publisher').value.trim();
+                        if (!title || !author || !year || !publisher) throw new Error('Please fill in all required fields for a book citation.');
+                        
+                        if (style === 'apa') citation = `${author}. (${year}). *${title}*. ${publisher}.`;
+                        else if (style === 'mla') citation = `${author}. *${title}*. ${publisher}, ${year}.`;
+                        else if (style === 'chicago') citation = `${author}. *${title}*. ${publisher}, ${year}.`;
+
+                    } else if (type === 'article') {
+                        const title = document.getElementById('article-title').value.trim();
+                        const author = document.getElementById('author-article').value.trim();
+                        const year = document.getElementById('year-article').value.trim();
+                        const journal = document.getElementById('journal').value.trim();
+                        const volume = document.getElementById('volume').value.trim();
+                        const issue = document.getElementById('issue').value.trim();
+                        const pages = document.getElementById('pages').value.trim();
+                        const doi = document.getElementById('doi').value.trim();
+                        if (!title || !author || !year || !journal || !pages) throw new Error('Please fill in all required fields for an article citation.');
+
+                        if (style === 'apa') {
+                            citation = `${author}. (${year}). ${title}. *${journal}*`;
+                            if (volume) citation += `, *${volume}*`;
+                            if (issue) citation += `(${issue})`;
+                            citation += `, ${pages}.`;
+                            if (doi) citation += ` https://doi.org/${doi}`;
+                        } else if (style === 'mla') {
+                            citation = `${author}. "${title}." *${journal}*`;
+                            if (volume) citation += `, vol. ${volume}`;
+                            if (issue) citation += `, no. ${issue}`;
+                            citation += `, ${year}, pp. ${pages}.`;
+                        } else if (style === 'chicago') {
+                            citation = `${author}. "${title}." *${journal}* ${volume ? volume : ''}`;
+                            if (issue) citation += `, no. ${issue}`;
+                            citation += ` (${year}): ${pages}.`;
+                            if (doi) citation += ` https://doi.org/${doi}`;
+                        }
+
+                    } else if (type === 'website') {
+                        const title = document.getElementById('page-title').value.trim();
+                        const author = document.getElementById('author-website').value.trim();
+                        const siteName = document.getElementById('website-name').value.trim();
+                        const year = document.getElementById('year-website').value.trim();
+                        const url = document.getElementById('url').value.trim();
+                        const date = document.getElementById('publish-date').value.trim();
+                        if (!title || !siteName || !url) throw new Error('Please fill in all required fields for a website citation.');
+
+                        if (style === 'apa') {
+                            citation = author ? `${author}. ` : '';
+                            citation += `(${year || 'n.d.'}). *${title}*. ${siteName}. Retrieved ${date || 'n.d.'}, from ${url}`;
+                        } else if (style === 'mla') {
+                            citation = author ? `${author}. ` : '';
+                            citation += `"${title}." *${siteName}*, ${date || 'n.d.'}, ${url}.`;
+                        } else if (style === 'chicago') {
+                            citation = author ? `${author}. ` : '';
+                            citation += `"${title}." ${siteName}. Last modified ${date || 'n.d.'}. ${url}.`;
+                        }
+                    } else if (type === 'thesis') {
+                        const title = document.getElementById('thesis-title').value.trim();
+                        const author = document.getElementById('author-thesis').value.trim();
+                        const year = document.getElementById('year-thesis').value.trim();
+                        const university = document.getElementById('university').value.trim();
+                        const degree = document.getElementById('degree-level').value.trim();
+                        if (!title || !author || !year || !university || !degree) throw new Error("Please fill in all required fields for a thesis citation.");
+
+                        if (style === 'apa') citation = `${author}. (${year}). *${title}* (${degree}). ${university}.`;
+                        else if (style === 'mla') citation = `${author}. *${title}*. ${year}. ${university}, ${degree}.`;
+                        else if (style === 'chicago') citation = `${author}. "${title}." (${degree}, ${university}, ${year}).`;
+                    }
+                } catch (e) {
+                    alert(e.message);
+                    return '';
+                }
+                
+                return citation;
+            }
+            
+            generateBtn.addEventListener('click', function() {
+                generateBtn.disabled = true;
+                generateBtn.textContent = 'Generating...';
+                
+                setTimeout(() => {
+                    const citation = generateCitation();
+                    if (citation) {
+                        outputText.value = citation;
+                    }
+                    
+                    generateBtn.disabled = false;
+                    generateBtn.textContent = 'Generate Citation';
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>

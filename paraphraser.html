@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Paraphrasing Tool - Online Sentence Rewriter | StudyToolKit</title>
+    <meta name="description" content="Use our free paraphrasing tool to rephrase sentences, paragraphs, and essays. Avoid plagiarism and improve your academic writing with our online sentence rewriter.">
+    <meta name="keywords" content="paraphrasing tool, free paraphrasing tool, sentence rewriter, rephrase tool, avoid plagiarism, online paraphraser, academic writing, reword tool, essay rewriter, paragraph rephraser, text rewriter, plagiarism fixer">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Free Paraphrasing Tool - Online Sentence Rewriter | StudyToolKit">
+    <meta property="og:description" content="A free tool to rephrase text for academic writing. Helps avoid plagiarism by rewriting sentences and paragraphs while keeping the original meaning.">
+    <meta property="og:type" content="website">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Paraphrasing Tool",
+        "description": "Free online sentence rewriter and paraphraser to help students avoid plagiarism and improve academic writing.",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "StudyToolKit"
+        }
+    }
+    </script>
+    <style>
+        /* All the same CSS styles from index.html */
+        :root {
+            --primary-color: #4f46e5;
+            --primary-light: #6366f1;
+            --text-color: #1e293b;
+            --text-light: #64748b;
+            --bg-color: #ffffff;
+            --bg-light: #f8fafc;
+            --border-radius: 8px;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --transition: all 0.2s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            color: var(--text-color);
+            background-color: var(--bg-light);
+            line-height: 1.5;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .header {
+            background-color: var(--bg-color);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .logo-svg {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Tool Page Styles */
+        .tool-container {
+            background-color: var(--bg-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .tool-header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .tool-header h1 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-header p {
+            color: var(--text-light);
+        }
+
+        .input-area, .output-area {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-area textarea, .output-area textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        .input-area textarea:focus, .output-area textarea:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .tool-actions {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-light);
+        }
+
+        .seo-content {
+            margin-top: 3rem;
+        }
+
+        .seo-content h2 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .seo-content h3 {
+            margin: 1.5rem 0 0.5rem;
+            color: var(--text-color);
+        }
+
+        .seo-content p, .seo-content li {
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 1rem;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            color: var(--text-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            padding-top: 0.5rem;
+            color: var(--text-light);
+            display: none;
+        }
+
+        .faq-answer.show {
+            display: block;
+        }
+
+        .footer {
+            background-color: var(--bg-color);
+            padding: 2rem 0;
+            margin-top: 3rem;
+            box-shadow: 0 -1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .footer nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .cookie-notice {
+            position: fixed;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--bg-color);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            max-width: 90%;
+            z-index: 1000;
+        }
+
+        .cookie-notice p {
+            margin: 0;
+            color: var(--text-light);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav ul {
+                gap: 1rem;
+            }
+
+            .footer .container {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .footer nav ul {
+                justify-content: center;
+            }
+
+            .cookie-notice {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+    <script src="https://unpkg.com/compromise"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <div class="logo-svg">STK</div>
+                <span>StudyToolKit</span>
+            </a>
+            <nav class="nav">
+                <ul>
+                    <li><a href="paraphraser.html">Paraphrasing Tool</a></li>
+                    <li><a href="summarizer.html">Text Summarizer</a></li>
+                    <li><a href="citation-generator.html">Citation Generator</a></li>
+                    <li><a href="word-to-pdf.html">Word to PDF</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="tool-container">
+            <div class="tool-header">
+                <h1>Online Paraphrasing Tool to Avoid Plagiarism</h1>
+                <p>Use our free sentence rewriter and rephrase tool to improve your academic writing.</p>
+            </div>
+
+            <div class="input-area">
+                <textarea id="input-text" placeholder="Paste your text here to rephrase..."></textarea>
+            </div>
+
+            <div class="tool-actions">
+                <button id="paraphrase-btn" class="btn">Paraphrase Text</button>
+                <div class="slider-container" style="margin-left: 2rem; display: flex; align-items: center; gap: 1rem;">
+                    <label for="intensity-slider">Intensity:</label>
+                    <input type="range" id="intensity-slider" min="0" max="2" value="1" step="1">
+                    <span id="intensity-label">Medium</span>
+                </div>
+            </div>
+
+            <div class="output-area">
+                <h3>Your Rewritten Text</h3>
+                <textarea id="output-text" placeholder="Your new, rephrased text will appear here..." readonly></textarea>
+            </div>
+        </section>
+
+        <section class="seo-content">
+            <h2>A Smart Reword Tool for Academic Writing</h2>
+            <p>Our free paraphrasing tool is designed for students and researchers who need to rewrite their text to prevent plagiarism. By using advanced logic, this online paraphraser helps you rephrase sentences while preserving the original meaning, making your writing clearer and more effective.</p>
+            
+            <h3>How to Use the Sentence Rewriter</h3>
+            <ol>
+                <li>Paste your original text into the input box.</li>
+                <li>Select your desired intensity: Light, Medium, or Aggressive.</li>
+                <li>Click the "Paraphrase Text" button to get your rewritten content.</li>
+                <li>Review the rephrased text and copy it for your essay, article, or paper.</li>
+            </ol>
+            
+            <h3>Why Use a Rephrase Tool?</h3>
+            <ul>
+                <li><h4>Avoid Plagiarism:</h4> The primary benefit is creating unique text to pass plagiarism checks.</li>
+                <li><h4>Improve Clarity:</h4> Rephrasing can help simplify complex sentences and make your ideas easier to understand.</li>
+                <li><h4>Enhance Vocabulary:</h4> Discover new synonyms and ways to express your arguments.</li>
+            </ul>
+            
+            <div class="faq-section">
+                <h3>Frequently Asked Questions</h3>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is this paraphrasing tool truly free?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, our sentence rewriter is completely free to use without any hidden costs or registration. It's a perfect tool for students on a budget.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is it safe to use for my academic papers?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely. Our tool is designed to help you write better, but you must always cite your original sources. Paraphrasing is a key academic skill, and this tool is a great assistant, but it does not replace proper academic integrity and citation practices.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How does this rephrase tool work?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our tool uses a combination of a curated synonym dictionary and grammatical rules to rewrite your text. It identifies words and phrases that can be changed without altering the meaning and sometimes adjusts sentence structures, all while running securely in your browser.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 StudyToolKit. All rights reserved.</p>
+            <nav>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+
+    <div class="cookie-notice">
+        <p>We use cookies to improve your experience. By continuing, you agree to our use of cookies.</p>
+        <button class="btn" id="accept-cookies">Accept</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const paraphraseBtn = document.getElementById('paraphrase-btn');
+            const inputText = document.getElementById('input-text');
+            const outputText = document.getElementById('output-text');
+            const intensitySlider = document.getElementById('intensity-slider');
+            const intensityLabel = document.getElementById('intensity-label');
+            const nlp = window.nlp;
+
+            const intensityLevels = {
+                0: { label: 'Light', rate: 0.8 }, // 20% chance
+                1: { label: 'Medium', rate: 0.6 }, // 40% chance
+                2: { label: 'Aggressive', rate: 0.5 } // 50% chance
+            };
+
+            if (intensitySlider) {
+                intensitySlider.addEventListener('input', function() {
+                    intensityLabel.textContent = intensityLevels[this.value].label;
+                });
+            }
+
+            const cookieNotice = document.querySelector('.cookie-notice');
+            if (cookieNotice && !localStorage.getItem('cookiesAccepted')) {
+                cookieNotice.style.display = 'flex';
+            }
+            if (cookieNotice) {
+                document.getElementById('accept-cookies').addEventListener('click', () => {
+                    localStorage.setItem('cookiesAccepted', 'true');
+                    cookieNotice.style.display = 'none';
+                });
+            }
+
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    const isShowing = answer.classList.contains('show');
+                    document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('show'));
+                    if (!isShowing) answer.classList.add('show');
+                });
+            });
+
+            function paraphrase(text, intensity) {
+                const protectedPhrases = {
+                    "climate change": ["global warming", "environmental crisis"],
+                    "fossil fuels": ["non-renewable fuels", "traditional energy sources"],
+                    "renewable energy": ["clean energy", "sustainable power"],
+                    "social media": ["online networks", "digital platforms"],
+                    "real time": ["instantaneously"],
+                    "power grid": ["electrical grid"]
+                };
+
+                const synonymMap = {
+                    "sources": ["origins", "forms", "types"], "gained": ["achieved", "acquired"],
+                    "momentum": ["traction", "impetus"], "growing": ["increasing", "rising"],
+                    "concerns": ["worries", "anxieties"], "impact": ["effect", "influence"],
+                    "governments": ["administrations", "authorities"], "investing": ["funding", "financing"],
+                    "heavily": ["substantially", "significantly"], "clean": ["sustainable", "green"],
+                    "technologies": ["innovations", "advancements"], "offering": ["providing", "supplying"],
+                    "incentives": ["subsidies", "encouragements"], "encourage": ["promote", "foster"],
+                    "individuals": ["people", "citizens"], "companies": ["corporations", "businesses"],
+                    "adopt": ["embrace", "implement"], "sustainable": ["eco-friendly", "green"],
+                    "practices": ["methods", "approaches"], "challenges": ["obstacles", "hurdles"],
+                    "remain": ["persist", "continue to exist"], "including": ["such as", "for instance"],
+                    "need": ["requirement", "necessity"], "better": ["improved", "more effective"],
+                    "storage": ["preservation", "warehousing"], "solutions": ["answers", "remedies"],
+                    "updating": ["modernizing", "upgrading"], "existing": ["current", "present"],
+                    "accommodate": ["integrate", "handle"], "variable": ["fluctuating", "inconsistent"],
+                    "significantly": ["considerably", "markedly"], "changed": ["altered", "transformed"],
+                    "way": ["manner", "method"], "communicate": ["interact", "connect"],
+                    "rise": ["emergence", "growth"], "platforms": ["networks", "services"],
+                    "can": ["are able to", "have the capacity to"], "stay": ["remain"],
+                    "connected": ["in touch", "linked"], "around": ["across the"],
+                    "world": ["globe"], "advancement": ["development", "progress"],
+                    "made": ["rendered", "caused"], "communication": ["interaction", "discourse"],
+                    "faster": ["quicker", "more rapid"], "convenient": ["accessible", "user-friendly"],
+                    "accessible": ["available", "reachable"]
+                };
+                
+                let protectedText = text;
+                const placeholders = {};
+                let i = 0;
+                for (const phrase in protectedPhrases) {
+                    const placeholder = `__PHRASE_${i}__`;
+                    const regex = new RegExp(phrase, "gi");
+                    if (regex.test(protectedText)) {
+                        protectedText = protectedText.replace(regex, placeholder);
+                        placeholders[placeholder] = phrase;
+                        i++;
+                    }
+                }
+
+                let sentences = protectedText.match(/[^.!?]+[.!?]+/g) || [protectedText];
+                let paraphrasedSentences = [];
+
+                sentences.forEach(sentence => {
+                    let words = sentence.split(/\s+/);
+                    let replacedInSentence = false;
+                    let newSentence = words.map(word => {
+                        let original = word.toLowerCase().replace(/[.,!?;:]+$/, '');
+                        let punctuation = (word.match(/[.,!?;:]+$/) || [''])[0];
+
+                        if (Math.random() > intensity.rate && synonymMap[original]) {
+                            let synonym = synonymMap[original][Math.floor(Math.random() * synonymMap[original].length)];
+                            if (word[0] === word[0].toUpperCase()) {
+                                synonym = synonym[0].toUpperCase() + synonym.slice(1);
+                            }
+                            replacedInSentence = true;
+                            return synonym + punctuation;
+                        }
+                        return word;
+                    }).join(' ');
+                    
+                    if (!replacedInSentence) {
+                        let doc = nlp(sentence);
+                        if (doc.sentences().length > 0) {
+                            let s = doc.sentences().get(0);
+                            if (s.has('#ActiveVoice') && Math.random() > 0.5) {
+                                s.toPassive();
+                                newSentence = s.out('text');
+                            }
+                        }
+                    }
+                    paraphrasedSentences.push(newSentence);
+                });
+
+                let finalText = paraphrasedSentences.join(' ');
+
+                for (const placeholder in placeholders) {
+                    const originalPhrase = placeholders[placeholder];
+                    const alternatives = protectedPhrases[originalPhrase];
+                    const chosenAlternative = alternatives[Math.floor(Math.random() * alternatives.length)];
+                    finalText = finalText.replace(new RegExp(placeholder, "g"), chosenAlternative);
+                }
+
+                return finalText || text;
+            }
+
+            paraphraseBtn.addEventListener('click', function() {
+                const text = inputText.value.trim();
+                if (!text) {
+                    alert('Please enter some text to paraphrase.');
+                    return;
+                }
+
+                paraphraseBtn.disabled = true;
+                paraphraseBtn.textContent = 'Paraphrasing...';
+
+                setTimeout(() => {
+                    try {
+                        const selectedIntensity = intensityLevels[intensitySlider.value];
+                        const result = paraphrase(text, selectedIntensity);
+                        outputText.value = result;
+                    } catch (error) {
+                        console.error("Paraphrasing error:", error);
+                        outputText.value = "Sorry, a critical error occurred. Please try again.";
+                    } finally {
+                        paraphraseBtn.disabled = false;
+                        paraphraseBtn.textContent = 'Paraphrase Text';
+                    }
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
