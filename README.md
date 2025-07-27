@@ -4,7 +4,7 @@
 
 Essential, privacy-focused online tools for students, writers, and researchers. Simplify your writing, citing, and formatting tasks instantly.
 
-👉 [Live Demo](https://yourusername.github.io/studytoolkit/)  
+👉 [Live Demo](https://website-0-eng.github.io/StudyToolKit/)  
 
 ## Features ✨
 
