@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>">
+    <meta name="theme-color" content="#4f46e5">
     <title>Free File to PDF Converter | StudyToolKit</title>
     <meta name="description" content="Convert your DOCX, PPTX, XLSX, TXT, and images to PDF format instantly with our free online converter. No watermarks, no registration required.">
     <meta name="keywords" content="free word to pdf converter, online docx to pdf, convert word to pdf, document converter, word document to pdf, microsoft word to pdf, doc to pdf converter, online file converter, student file converter, academic document converter, word to pdf no watermark, word to pdf free online, docx to pdf converter, office document converter, study file converter, research paper converter, essay file converter, thesis document converter, paper format converter, word to pdf web app, browser-based pdf converter, secure document conversion, privacy-focused converter, no registration converter, docx to pdf online free, word to pdf student tool, academic file converter, homework file converter, assignment submission tool, document format converter, word processor to pdf, office to pdf converter, school file converter, university document converter, college file tool, study document converter, research file converter, paper submission tool, essay submission converter, thesis format converter, dissertation file converter, report converter, academic paper converter, writing submission tool, education file converter, learning document tool, student resources converter">
@@ -165,6 +167,7 @@
         .tool-header h1 {
             color: var(--primary-color);
             margin-bottom: 0.5rem;
+            font-size: 2.2rem; /* Explicitly set font size */
         }
 
         .tool-header p {
@@ -244,6 +247,12 @@
             text-align: center;
             margin-top: 2rem;
             display: none;
+        }
+
+        .output-area h2 {
+            font-size: 1.5rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
         }
 
         .seo-content {
@@ -397,11 +406,11 @@
         }
     </style>
     <!-- Include necessary libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.0/mammoth.browser.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.0/mammoth.browser.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" defer></script>
 </head>
 <body>
     <header class="header">
@@ -446,7 +455,7 @@
             </div>
 
             <div class="output-area" id="output-area">
-                <h3>Conversion Complete</h3>
+                <h2>Conversion Complete</h2>
                 <p>Your PDF is ready to download.</p>
                 <button id="download-btn" class="btn">Download PDF</button>
             </div>
