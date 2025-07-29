@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>">
+    <meta name="theme-color" content="#4f46e5">
     <title>Free Text Summarizer - Online Article Summarizer | StudyToolKit</title>
     <meta name="description" content="Our free text summarizer helps you condense articles, papers, and essays. Extract key points and summarize text online to save time on reading and research.">
     <meta name="keywords" content="text summarizer, free text summarizer, article summarizer, summarize text online, summary generator, key point extractor, academic summary tool, online summarizer, research paper summarizer, essay summarizer">
@@ -168,6 +170,7 @@
         .tool-header h1 {
             color: var(--primary-color);
             margin-bottom: 0.5rem;
+            font-size: 2.2rem; /* Explicitly set font size */
         }
 
         .tool-header p {
@@ -223,6 +226,13 @@
             border-radius: var(--border-radius);
             border: 1px solid #e2e8f0;
             font-family: inherit;
+        }
+
+        .output-area h2 {
+            font-size: 1.5rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            text-align: center;
         }
 
         .seo-content {
@@ -391,7 +401,7 @@
             </div>
 
             <div class="output-area">
-                <h3>Your Generated Summary</h3>
+                <h2>Your Generated Summary</h2>
                 <textarea id="output-text" placeholder="The concise summary will appear here..." readonly></textarea>
             </div>
         </section>
