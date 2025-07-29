@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>">
+    <meta name="theme-color" content="#4f46e5">
     <title>Free Paraphrasing Tool - Online Sentence Rewriter | StudyToolKit</title>
     <meta name="description" content="Use our free paraphrasing tool to rephrase sentences, paragraphs, and essays. Avoid plagiarism and improve your academic writing with our online sentence rewriter.">
     <meta name="keywords" content="paraphrasing tool, free paraphrasing tool, sentence rewriter, rephrase tool, avoid plagiarism, online paraphraser, academic writing, reword tool, essay rewriter, paragraph rephraser, text rewriter, plagiarism fixer">
@@ -178,6 +180,7 @@
         .tool-header h1 {
             color: var(--primary-color);
             margin-bottom: 0.5rem;
+            font-size: 2.2rem; /* Explicitly set font size */
         }
 
         .tool-header p {
@@ -225,6 +228,13 @@
 
         .btn:hover {
             background-color: var(--primary-light);
+        }
+        
+        .output-area h2 {
+            font-size: 1.5rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            text-align: center;
         }
 
         .seo-content {
@@ -348,7 +358,7 @@
             }
         }
     </style>
-    <script src="https://unpkg.com/compromise"></script>
+    <script src="https://unpkg.com/compromise" defer></script>
 </head>
 <body>
     <header class="header">
@@ -389,7 +399,7 @@
             </div>
 
             <div class="output-area">
-                <h3>Your Rewritten Text</h3>
+                <h2>Your Rewritten Text</h2>
                 <textarea id="output-text" placeholder="Your new, rephrased text will appear here..." readonly></textarea>
             </div>
         </section>
