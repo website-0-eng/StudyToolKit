@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>">
+    <meta name="theme-color" content="#4f46e5">
     <title>Free APA/MLA Citation Generator | StudyToolKit</title>
     <meta name="description" content="Generate perfect APA and MLA citations for books, articles, and websites with our free citation tool. Save time on your bibliography and works cited pages.">
     <meta name="keywords" content="free citation generator, APA citation maker, MLA citation tool, bibliography generator, works cited creator, academic citation tool, reference generator, book citation tool, article citation maker, website citation generator, research paper citations, essay citation helper, online citation machine, automatic citation creator, citation format helper, APA 7th edition generator, MLA 8th edition generator, citation builder, academic reference tool, study citation helper, paper writing tool, bibliography creator, citation format generator, reference list maker, citation style formatter, student citation tool, citation machine, reference generator, academic formatting tool, research citation helper, essay reference tool, paper citation generator, thesis citation maker, dissertation reference tool, academic writing helper, citation style generator, bibliography maker, works cited page generator, in-text citation creator, reference list generator, citation formatter, academic paper helper, research reference tool, writing citation assistant, source citation generator, citation style assistant, reference builder, citation helper tool, academic citation assistant, research paper reference tool">
@@ -170,6 +172,7 @@
         .tool-header h1 {
             color: var(--primary-color);
             margin-bottom: 0.5rem;
+            font-size: 2.2rem; /* Explicitly set font size */
         }
 
         .tool-header p {
@@ -206,6 +209,13 @@
 
         .citation-fields.active {
             display: block;
+        }
+
+        .output-area h2 {
+            font-size: 1.5rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            text-align: center;
         }
 
         .output-area textarea {
@@ -449,7 +459,7 @@
             </div>
 
             <div class="output-area">
-                <h3>Generated Citation</h3>
+                <h2>Generated Citation</h2>
                 <textarea id="output-text" placeholder="Your citation will appear here..." readonly></textarea>
             </div>
         </section>
